@@ -128,37 +128,43 @@ function cellSelect(value, options, onChange) {
   return `<select class="select js-change" data-change="${onChange}">${opts}</select>`;
 }
 
-function slotBox(label, item) {
+function slotBox(label, item, compact = false) {
+  const boxClass = compact ? "slot-box compact" : "slot-box";
+  const emptyClass = compact ? "slot-empty compact" : "slot-empty";
+  const colorClass = compact ? "slot-color compact" : "slot-color";
+  const brandClass = compact ? "slot-brand compact" : "slot-brand";
+
   if (!item) {
     return `
-      <div class="slot-box">
+      <div class="${boxClass}">
         <div class="slot-top"><span class="pill">${escapeHtml(label)}</span></div>
-        <div class="slot-empty">Libre</div>
+        <div class="${emptyClass}">Libre</div>
       </div>`;
   }
 
   return `
-    <div class="slot-box">
+    <div class="${boxClass}">
       <div class="slot-top">
         <span class="pill">${escapeHtml(label)}</span>
         <span class="pill dark">${escapeHtml(item.material || "")}</span>
       </div>
-      <div class="slot-color" style="${colorStyle(item.color)}${textColor(item.color)}">${escapeHtml(item.color)}</div>
-      <div class="slot-brand">${escapeHtml(item.fabricante)}</div>
+      <div class="${colorClass}" style="${colorStyle(item.color)}${textColor(item.color)}">${escapeHtml(item.color)}</div>
+      <div class="${brandClass}">${escapeHtml(item.fabricante)}</div>
       <div class="slot-model">${escapeHtml(item.modelo)}</div>
       <div class="slot-state">${escapeHtml(item.estado)}</div>
     </div>`;
 }
 
-function renderAms(group) {
-  const items = rows.filter((r) => r.grupo === group.name);
+function renderAms(group, options = {}) {
+  const { compact = false, titleOverride = null, itemsOverride = null } = options;
+  const items = itemsOverride || rows.filter((r) => r.grupo === group.name);
   const bySlot = Object.fromEntries(items.filter((i) => i.hueco).map((i) => [i.hueco, i]));
   return `
-    <section class="card visual-card">
-      <div class="visual-title">${escapeHtml(group.name)}</div>
-      <img src="${escapeHtml(group.drawing)}" alt="${escapeHtml(group.name)}" class="device-drawing" />
-      <div class="slot-grid">
-        ${(group.slots || []).map((slot) => slotBox(slot, bySlot[slot])).join("")}
+    <section class="card visual-card ${compact ? "compact-card" : ""}">
+      <div class="visual-title ${compact ? "compact-title" : ""}">${escapeHtml(titleOverride || group.name)}</div>
+      <img src="${escapeHtml(group.drawing)}" alt="${escapeHtml(titleOverride || group.name)}" class="device-drawing ${compact ? "compact-drawing" : ""}" />
+      <div class="slot-grid ${compact ? "compact-grid" : ""}">
+        ${(group.slots || []).map((slot) => slotBox(slot, bySlot[slot], compact)).join("")}
       </div>
     </section>`;
 }
@@ -214,102 +220,83 @@ function renderListGroup(group) {
 }
 
 function render() {
-  const s = stats();
   const filtered = filteredRows();
-  const groupsForRight = config.groups.filter((g) => g.type === "ams" || g.type === "shelf" || g.type === "list");
+  const amsHtGroup = config.groups.find((g) => g.name === "AMS HT");
+  const amsProGroups = config.groups.filter((g) => g.type === "ams" && g.name !== "AMS HT");
 
   app.innerHTML = `
     <div class="page">
-      <section class="card hero">
-        <div>
-          <div class="chip">PWA inventario de filamentos</div>
-          <h1>${escapeHtml(config.appSubtitle || config.appTitle)}</h1>
-          <p>Editable desde iPhone, iPad o navegador. Preparada para GitHub + Netlify, con archivos separados, importación/exportación Excel y panel visual con dibujos.</p>
-          <div class="notice" style="margin-top:12px;">La mayoría de mejoras futuras se podrán hacer cambiando solo <strong>data/config.json</strong>, <strong>data/inventario.json</strong>, <strong>app.js</strong> o <strong>styles.css</strong>.</div>
-        </div>
-        <div class="stats">
-          <div class="stat"><div class="label">Total</div><div class="value">${s.total}</div></div>
-          <div class="stat"><div class="label">AMS</div><div class="value">${s.ams}</div></div>
-          <div class="stat"><div class="label">Est. derecha</div><div class="value">${s.shelf1}</div></div>
-          <div class="stat"><div class="label">Est. izquierda</div><div class="value">${s.shelf2}</div></div>
-        </div>
-      </section>
-
-      <div class="layout">
-        <section class="card section left">
-          <div class="toolbar">
-            <div class="toolbar-top">
-              <div class="title">Inventario editable</div>
-              <div class="actions">
-                <button class="btn primary" id="add-row">Añadir fila</button>
-                <button class="btn" id="import-excel">Importar Excel</button>
-                <button class="btn" id="export-excel">Exportar Excel</button>
-                <button class="btn" id="reset-base">Recargar base</button>
-                <input id="file-input" type="file" accept=".xlsx,.xls" hidden />
-              </div>
-            </div>
-            <div class="filters">
-              <input class="search" id="search-input" placeholder="Buscar por fabricante, modelo, material, color o ubicación" value="${escapeHtml(searchValue)}" />
-              <select class="search" id="filter-group">
-                <option value="Todas" ${filterGroup === "Todas" ? "selected" : ""}>Todas</option>
-                ${config.groups.map((group) => `<option value="${escapeHtml(group.name)}" ${filterGroup === group.name ? "selected" : ""}>${escapeHtml(group.name)}</option>`).join("")}
-              </select>
-            </div>
-          </div>
-
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Fabricante</th>
-                  <th>Modelo</th>
-                  <th>Material</th>
-                  <th>Color</th>
-                  <th>Grupo</th>
-                  <th>Hueco</th>
-                  <th>Estado</th>
-                  <th>Notas</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${filtered.map((row) => {
-                  const slots = getSlots(row.grupo);
-                  return `
-                    <tr data-id="${row.id}">
-                      <td>${cellSelect(row.fabricante, config.brands, "fabricante")}</td>
-                      <td><input class="input js-input" data-field="modelo" value="${escapeHtml(row.modelo)}" /></td>
-                      <td>${cellSelect(row.material, config.materials, "material")}</td>
-                      <td>
-                        <div class="color-cell">
-                          <div class="color-dot" style="${colorStyle(row.color)}"></div>
-                          ${cellSelect(row.color, config.colors, "color")}
-                        </div>
-                      </td>
-                      <td>${cellSelect(row.grupo, config.groups.map((g) => g.name), "grupo")}</td>
-                      <td>${slots.length ? cellSelect(row.hueco, slots, "hueco") : `<div class="empty-slot">-</div>`}</td>
-                      <td>${cellSelect(row.estado, config.states, "estado")}</td>
-                      <td><input class="input js-input" data-field="notas" value="${escapeHtml(row.notas)}" /></td>
-                      <td><button class="btn danger js-delete">Borrar</button></td>
-                    </tr>`;
-                }).join("")}
-              </tbody>
-            </table>
-          </div>
+      <div class="top-visuals">
+        <section class="ht-column">
+          ${amsHtGroup ? renderAms(amsHtGroup, { compact: true, titleOverride: "AMS HT #1" }) : ""}
+          ${amsHtGroup ? renderAms(amsHtGroup, { compact: true, titleOverride: "AMS HT #2", itemsOverride: [] }) : ""}
         </section>
 
-        <section class="right">
-          ${groupsForRight.map((group) => {
-            if (group.type === "ams") return renderAms(group);
-            if (group.type === "shelf") return renderShelf(group);
-            return renderListGroup(group);
-          }).join("")}
+        <section class="ams-pro-grid">
+          ${amsProGroups.map((group) => renderAms(group)).join("")}
         </section>
       </div>
 
-      <section class="card footer-note">
-        <div>Pensada para iPhone e iPad como PWA y para desplegarla automáticamente en Netlify desde GitHub.</div>
-        <div class="small">Archivos importantes: <strong>data/config.json</strong>, <strong>data/inventario.json</strong>, <strong>app.js</strong>, <strong>styles.css</strong>.</div>
+      <section class="card section full-width-section">
+        <div class="toolbar">
+          <div class="toolbar-top">
+            <div class="title">Inventario editable</div>
+            <div class="actions">
+              <button class="btn primary" id="add-row">Añadir fila</button>
+              <button class="btn" id="import-excel">Importar Excel</button>
+              <button class="btn" id="export-excel">Exportar Excel</button>
+              <button class="btn" id="reset-base">Recargar base</button>
+              <input id="file-input" type="file" accept=".xlsx,.xls" hidden />
+            </div>
+          </div>
+          <div class="filters">
+            <input class="search" id="search-input" placeholder="Buscar por fabricante, modelo, material, color o ubicación" value="${escapeHtml(searchValue)}" />
+            <select class="search" id="filter-group">
+              <option value="Todas" ${filterGroup === "Todas" ? "selected" : ""}>Todas</option>
+              ${config.groups.map((group) => `<option value="${escapeHtml(group.name)}" ${filterGroup === group.name ? "selected" : ""}>${escapeHtml(group.name)}</option>`).join("")}
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fabricante</th>
+                <th>Modelo</th>
+                <th>Material</th>
+                <th>Color</th>
+                <th>Grupo</th>
+                <th>Hueco</th>
+                <th>Estado</th>
+                <th>Notas</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered.map((row) => {
+                const slots = getSlots(row.grupo);
+                return `
+                  <tr data-id="${row.id}">
+                    <td>${cellSelect(row.fabricante, config.brands, "fabricante")}</td>
+                    <td><input class="input js-input" data-field="modelo" value="${escapeHtml(row.modelo)}" /></td>
+                    <td>${cellSelect(row.material, config.materials, "material")}</td>
+                    <td>
+                      <div class="color-cell">
+                        <div class="color-dot" style="${colorStyle(row.color)}"></div>
+                        ${cellSelect(row.color, config.colors, "color")}
+                      </div>
+                    </td>
+                    <td>${cellSelect(row.grupo, config.groups.map((g) => g.name), "grupo")}</td>
+                    <td>${slots.length ? cellSelect(row.hueco, slots, "hueco") : `<div class="empty-slot">-</div>`}</td>
+                    <td>${cellSelect(row.estado, config.states, "estado")}</td>
+                    <td><input class="input js-input" data-field="notas" value="${escapeHtml(row.notas)}" /></td>
+                    <td><button class="btn danger js-delete">Borrar</button></td>
+                  </tr>`;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>`;
 
