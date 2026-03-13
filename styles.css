@@ -82,3 +82,66 @@ button, input, select { font: inherit; }
   .actions { display: grid; width: 100%; }
   .btn { width: 100%; }
 }
+
+
+.top-visuals {
+  display: grid;
+  gap: 16px;
+}
+
+.ht-column,
+.ams-pro-grid {
+  display: grid;
+  gap: 16px;
+  align-self: start;
+}
+
+.full-width-section {
+  width: 100%;
+}
+
+.visual-card.compact-card {
+  padding: 14px;
+}
+
+.visual-title.compact-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.device-drawing.compact-drawing {
+  max-height: 140px;
+  object-fit: contain;
+}
+
+.slot-grid.compact-grid {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.slot-box.compact {
+  padding: 10px;
+}
+
+.slot-color.compact {
+  min-height: 42px;
+}
+
+.slot-brand.compact {
+  font-size: 12px;
+}
+
+.slot-empty.compact {
+  min-height: 72px;
+}
+
+@media (min-width: 900px) {
+  .top-visuals {
+    grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+    align-items: start;
+  }
+
+  .ams-pro-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
