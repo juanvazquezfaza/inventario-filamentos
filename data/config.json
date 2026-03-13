@@ -1,0 +1,108 @@
+{
+  "appTitle": "Inventario de Filamentos",
+  "appSubtitle": "Formato Excel con dibujos de AMS y estanterías",
+  "storageKey": "juanjo-filaments-pwa-static-v1",
+  "brands": [
+    "Bambu Lab",
+    "Prusament",
+    "Polymaker",
+    "eSUN",
+    "SUNLU",
+    "Overture",
+    "HATCHBOX",
+    "Fiberlogy",
+    "Creality",
+    "Otro"
+  ],
+  "materials": [
+    "PLA",
+    "PLA Matte",
+    "PLA Silk",
+    "PETG",
+    "ABS",
+    "ASA",
+    "TPU",
+    "PA",
+    "PC",
+    "Otro"
+  ],
+  "colors": [
+    "blanco",
+    "negro",
+    "gris",
+    "plateado",
+    "transparente",
+    "rojo",
+    "naranja",
+    "amarillo",
+    "verde",
+    "azul",
+    "cian",
+    "morado",
+    "rosa",
+    "marrón",
+    "beige",
+    "dorado",
+    "bronce",
+    "multicolor",
+    "madera",
+    "mármol",
+    "carbon"
+  ],
+  "states": [
+    "Nuevo",
+    "Abierto",
+    "En uso",
+    "Poco restante",
+    "Casi vacío",
+    "Agotado"
+  ],
+  "groups": [
+    {
+      "name": "AMS 2 Pro #1",
+      "type": "ams",
+      "drawing": "drawings/ams-2pro.svg",
+      "slots": ["A1", "A2", "A3", "A4"]
+    },
+    {
+      "name": "AMS 2 Pro #2",
+      "type": "ams",
+      "drawing": "drawings/ams-2pro.svg",
+      "slots": ["B1", "B2", "B3", "B4"]
+    },
+    {
+      "name": "AMS 2 Pro #3",
+      "type": "ams",
+      "drawing": "drawings/ams-2pro.svg",
+      "slots": ["C1", "C2", "C3", "C4"]
+    },
+    {
+      "name": "AMS HT",
+      "type": "ams",
+      "drawing": "drawings/ams-ht.svg",
+      "slots": ["S1"]
+    },
+    {
+      "name": "Estantería Derecha",
+      "type": "shelf",
+      "drawing": "drawings/shelf.svg",
+      "levels": 3,
+      "perLevel": 4
+    },
+    {
+      "name": "Estantería Izquierda",
+      "type": "shelf",
+      "drawing": "drawings/shelf.svg",
+      "levels": 3,
+      "perLevel": 4
+    },
+    {
+      "name": "Exterior",
+      "type": "list"
+    },
+    {
+      "name": "Otro",
+      "type": "list"
+    }
+  ]
+}

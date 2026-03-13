@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "fabricante": "Bambu Lab",
+    "modelo": "PLA Basic",
+    "material": "PLA",
+    "color": "negro",
+    "grupo": "AMS 2 Pro #1",
+    "hueco": "A1",
+    "estado": "Abierto",
+    "notas": ""
+  },
+  {
+    "id": 2,
+    "fabricante": "Fiberlogy",
+    "modelo": "Easy PET-G",
+    "material": "PETG",
+    "color": "blanco",
+    "grupo": "AMS 2 Pro #1",
+    "hueco": "A2",
+    "estado": "Abierto",
+    "notas": ""
+  },
+  {
+    "id": 3,
+    "fabricante": "Prusament",
+    "modelo": "PLA Galaxy Silver",
+    "material": "PLA",
+    "color": "plateado",
+    "grupo": "Estantería Derecha",
+    "hueco": "",
+    "estado": "Nuevo",
+    "notas": ""
+  },
+  {
+    "id": 4,
+    "fabricante": "Bambu Lab",
+    "modelo": "PETG HF",
+    "material": "PETG",
+    "color": "verde",
+    "grupo": "AMS HT",
+    "hueco": "S1",
+    "estado": "Nuevo",
+    "notas": "Secado recomendado"
+  }
+]
