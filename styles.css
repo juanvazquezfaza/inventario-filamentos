@@ -59,7 +59,7 @@ body{
 .ht-card{width:128px;min-width:128px}
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
-.ams-row .ams2-card:last-child{margin-left:-10px}
+.ams-row .ams2-card:last-child{margin-left:-76px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
@@ -101,12 +101,13 @@ body{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px 8px 2px;
+  padding:8px 8px 8px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
   min-width:0;
+  min-height:0;
 }
 .shelf-panel:first-child{flex:1550 1 0}
 .shelf-panel:last-child{flex:3086 1 0}
@@ -117,7 +118,7 @@ body{
   flex:0 0 auto;
   transform:scaleY(0.66);
   transform-origin:top center;
-  margin-bottom:-25%;
+  margin-bottom:-23%;
 }
 .shelf-visual img.base{width:100%;height:auto;display:block}
 .slot-overlay{position:absolute}
@@ -128,8 +129,8 @@ body{
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
 .slot-label{
-  position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
-  width:76%;height:56%;max-height:170px;
+  position:absolute;left:50%;top:34.8%;transform:translateX(-50%);
+  width:76%;height:58%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
   border:1px solid rgba(255,255,255,.15);text-align:center;color:#fff;
@@ -158,8 +159,8 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   :root{--ams-h: clamp(132px, 17.2vh, 156px); --tag-w:52px; --tag-h:48px}
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
-  .shelf-visual{transform:scaleY(0.64);margin-bottom:-27%}
-  .slot-label{width:74%;top:37.1%}
+  .shelf-visual{transform:scaleY(0.64);margin-bottom:-25%}
+  .slot-label{width:74%;top:35.3%}
 }
 @media (max-width: 1600px){
   :root{--ams-h: clamp(124px, 16vh, 146px); --tag-w:50px; --tag-h:46px}
@@ -167,9 +168,9 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ht-card{width:116px;min-width:116px}
   .shelf-panel:first-child{flex:1.55 1 0}
   .shelf-panel:last-child{flex:3.086 1 0}
-  .shelf-visual{transform:scaleY(0.61);margin-bottom:-29%}
+  .shelf-visual{transform:scaleY(0.61);margin-bottom:-26%}
   .slot-circle-wrap{width:29%}
-  .slot-label{width:72%;top:37.6%}
+  .slot-label{width:72%;top:35.8%}
   .slot-label .slot-code{font-size:11px}
   .slot-label .slot-brand{font-size:9.4px}
   .slot-label .slot-mat{font-size:8.4px}
