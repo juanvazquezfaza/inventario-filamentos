@@ -72,3 +72,6 @@ Eso vuelve al contenido de `data/inventario.json`.
 
 Para cambios de estructura o nombres, casi siempre bastará con `data/config.json`.
 Para tus bobinas iniciales, `data/inventario.json`.
+
+
+Actualización v3: rediseño visual con AMS y estanterías coloreadas por listado.

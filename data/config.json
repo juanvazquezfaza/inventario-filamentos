@@ -1,7 +1,5 @@
 {
-  "appTitle": "Inventario de Filamentos",
-  "appSubtitle": "Inventario visual de AMS y estanterías",
-  "storageKey": "juanjo-filaments-pwa-static-v2",
+  "storageKey": "juanjo-filaments-layout-v3",
   "brands": [
     "Bambu Lab",
     "Prusament",
@@ -10,21 +8,34 @@
     "SUNLU",
     "Overture",
     "HATCHBOX",
+    "MatterHackers",
     "Fiberlogy",
+    "ColorFabb",
+    "Fillamentum",
+    "FormFutura",
+    "Spectrum Filaments",
+    "BASF Ultrafuse",
+    "Proto-pasta",
+    "3DXTech",
+    "Taulman3D",
+    "Ultimaker",
     "Creality",
-    "Otro"
-  ],
-  "materials": [
-    "PLA",
-    "PLA Matte",
-    "PLA Silk",
-    "PETG",
-    "ABS",
-    "ASA",
-    "TPU",
-    "PA",
-    "PC",
-    "Otro"
+    "Anycubic",
+    "ELEGOO",
+    "Duramic 3D",
+    "ERYONE",
+    "Inland (Micro Center)",
+    "Amazon Basics",
+    "Geeetech",
+    "Kodak",
+    "Raise3D",
+    "IC3D",
+    "Recreus",
+    "SmartMaterials3D",
+    "AIO Robotics",
+    "Mika3D",
+    "Amolen",
+    "Other / Generic"
   ],
   "colors": [
     "blanco",
@@ -47,40 +58,142 @@
     "multicolor",
     "madera",
     "mármol",
-    "carbon"
+    "carbón",
+    "natural"
   ],
   "states": [
     "Nuevo",
     "Abierto",
     "En uso",
-    "Poco restante",
     "Casi vacío",
     "Agotado"
   ],
+  "materialsGeneral": [
+    "PLA",
+    "PETG",
+    "ABS",
+    "ASA",
+    "TPU",
+    "PA (Nylon)",
+    "PC",
+    "PVA",
+    "HIPS",
+    "BVOH",
+    "PP",
+    "PCTG",
+    "PET",
+    "Otro"
+  ],
+  "materialVariants": {
+    "PLA": [
+      "Standard",
+      "Matte",
+      "Silk",
+      "Tough/Pro",
+      "HF/HS",
+      "CF",
+      "GF",
+      "Glow",
+      "Wood",
+      "Marble",
+      "Sparkle",
+      "Aero"
+    ],
+    "PETG": [
+      "Standard",
+      "HF/HS",
+      "Transparent",
+      "Matte",
+      "CF",
+      "GF",
+      "ESD"
+    ],
+    "ABS": [
+      "Standard",
+      "Plus",
+      "CF",
+      "FR"
+    ],
+    "ASA": [
+      "Standard",
+      "CF",
+      "GF",
+      "Aero"
+    ],
+    "TPU": [
+      "85A",
+      "90A",
+      "95A",
+      "98A",
+      "HF/HS",
+      "ESD"
+    ],
+    "PA (Nylon)": [
+      "PA6",
+      "PA12",
+      "PA612",
+      "CoPA",
+      "CF",
+      "GF",
+      "ESD"
+    ],
+    "PC": [
+      "Standard",
+      "Blend",
+      "CF",
+      "FR"
+    ],
+    "PVA": [
+      "Standard"
+    ],
+    "HIPS": [
+      "Standard"
+    ],
+    "BVOH": [
+      "Standard"
+    ],
+    "PP": [
+      "Standard",
+      "GF"
+    ],
+    "PCTG": [
+      "Standard",
+      "Transparent"
+    ],
+    "PET": [
+      "Standard",
+      "CF",
+      "GF"
+    ],
+    "Otro": [
+      "Standard",
+      "Matte",
+      "Silk",
+      "Transparent",
+      "CF",
+      "GF",
+      "Wood",
+      "Glow"
+    ]
+  },
   "groups": [
     {
-      "name": "AMS HT #1",
-      "type": "ams",
-      "variant": "amsht",
-      "drawing": "drawings/ams-ht-real-base.png",
+      "name": "AMS HT *1",
+      "kind": "ams_ht",
       "slots": [
-        "HT-A"
+        "HT1"
       ]
     },
     {
-      "name": "AMS HT #2",
-      "type": "ams",
-      "variant": "amsht",
-      "drawing": "drawings/ams-ht-real-base.png",
+      "name": "AMS HT *2",
+      "kind": "ams_ht",
       "slots": [
-        "HT-A"
+        "HT1"
       ]
     },
     {
-      "name": "AMS 2 Pro #1",
-      "type": "ams",
-      "variant": "ams2pro",
-      "drawing": "drawings/ams-2pro-real-base.png",
+      "name": "AMS 2 Pro *1",
+      "kind": "ams_2pro",
       "slots": [
         "A1",
         "A2",
@@ -89,50 +202,72 @@
       ]
     },
     {
-      "name": "AMS 2 Pro #2",
-      "type": "ams",
-      "variant": "ams2pro",
-      "drawing": "drawings/ams-2pro-real-base.png",
+      "name": "AMS 2 Pro *2",
+      "kind": "ams_2pro",
       "slots": [
-        "A1",
-        "A2",
-        "A3",
-        "A4"
+        "B1",
+        "B2",
+        "B3",
+        "B4"
       ]
     },
     {
-      "name": "AMS 2 Pro #3",
-      "type": "ams",
-      "variant": "ams2pro",
-      "drawing": "drawings/ams-2pro-real-base.png",
+      "name": "AMS 2 Pro *3",
+      "kind": "ams_2pro",
       "slots": [
-        "A1",
-        "A2",
-        "A3",
-        "A4"
+        "C1",
+        "C2",
+        "C3",
+        "C4"
       ]
     },
     {
-      "name": "Estantería Derecha",
-      "type": "shelf",
-      "drawing": "drawings/shelf.svg",
-      "levels": 3,
-      "perLevel": 4
+      "name": "Estantería *1",
+      "kind": "shelf_12",
+      "slots": [
+        "S1-01",
+        "S1-02",
+        "S1-03",
+        "S1-04",
+        "S1-05",
+        "S1-06",
+        "S1-07",
+        "S1-08",
+        "S1-09",
+        "S1-10",
+        "S1-11",
+        "S1-12"
+      ]
     },
     {
-      "name": "Estantería Izquierda",
-      "type": "shelf",
-      "drawing": "drawings/shelf.svg",
-      "levels": 3,
-      "perLevel": 4
-    },
-    {
-      "name": "Exterior",
-      "type": "list"
-    },
-    {
-      "name": "Otro",
-      "type": "list"
+      "name": "Estantería *2",
+      "kind": "shelf_24",
+      "slots": [
+        "S2-01",
+        "S2-02",
+        "S2-03",
+        "S2-04",
+        "S2-05",
+        "S2-06",
+        "S2-07",
+        "S2-08",
+        "S2-09",
+        "S2-10",
+        "S2-11",
+        "S2-12",
+        "S2-13",
+        "S2-14",
+        "S2-15",
+        "S2-16",
+        "S2-17",
+        "S2-18",
+        "S2-19",
+        "S2-20",
+        "S2-21",
+        "S2-22",
+        "S2-23",
+        "S2-24"
+      ]
     }
   ]
 }
