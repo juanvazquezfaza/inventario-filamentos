@@ -59,6 +59,7 @@ body{
 .ht-card{width:128px;min-width:128px}
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
+.ams-row .ams2-card:last-child{margin-left:-10px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
@@ -94,7 +95,7 @@ body{
   display:flex;
   gap:14px;
   margin-top:8px;
-  align-items:flex-start;
+  align-items:stretch;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
@@ -104,6 +105,7 @@ body{
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content:flex-start;
   min-width:0;
 }
 .shelf-panel:first-child{flex:1550 1 0}
@@ -126,7 +128,7 @@ body{
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
 .slot-label{
-  position:absolute;left:50%;top:38.5%;transform:translateX(-50%);
+  position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
   width:76%;height:56%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
@@ -134,12 +136,12 @@ body{
   box-shadow:0 4px 10px rgba(0,0,0,.12);display:flex;flex-direction:column;overflow:hidden;
 }
 .slot-label .slot-code{font-size:12px;font-weight:800;line-height:1.05;margin-bottom:4px;flex:0 0 auto}
-.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.08;flex:1 1 auto;display:flex;align-items:flex-start;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
-.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;flex:1 1 auto;display:flex;align-items:flex-start;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
+.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.08;flex:1 1 auto;display:flex;align-items:stretch;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
+.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;flex:1 1 auto;display:flex;align-items:stretch;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
 .editor-panel{
   margin-top:6px;background:rgba(18,23,29,.82);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:12px 14px;
 }
-.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+.panel-head{display:flex;justify-content:space-between;align-items:stretch;gap:12px;margin-bottom:10px}
 .panel-head h2{margin:0 0 4px;font-size:20px}
 .panel-head p{margin:0;color:var(--muted);font-size:13px}
 .panel-actions{display:flex;gap:8px;flex-wrap:wrap}
@@ -157,7 +159,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
   .shelf-visual{transform:scaleY(0.64);margin-bottom:-27%}
-  .slot-label{width:74%;top:39%}
+  .slot-label{width:74%;top:37.1%}
 }
 @media (max-width: 1600px){
   :root{--ams-h: clamp(124px, 16vh, 146px); --tag-w:50px; --tag-h:46px}
@@ -167,7 +169,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .shelf-panel:last-child{flex:3.086 1 0}
   .shelf-visual{transform:scaleY(0.61);margin-bottom:-29%}
   .slot-circle-wrap{width:29%}
-  .slot-label{width:72%;top:39.5%}
+  .slot-label{width:72%;top:37.6%}
   .slot-label .slot-code{font-size:11px}
   .slot-label .slot-brand{font-size:9.4px}
   .slot-label .slot-mat{font-size:8.4px}
