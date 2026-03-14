@@ -9,11 +9,21 @@ const byId = (id) => document.getElementById(id);
 const variantFallback = "Standard";
 
 function safeAbbrev(name) {
-  return config.abbrev[name] || name.slice(0, 3).toUpperCase();
+  return config.abbrev[name] || name || "";
 }
 
 function fullBrand(name) {
   return name || "";
+}
+
+function fitText(el, minPx = 6, maxPx = 12) {
+  if (!el) return;
+  let size = maxPx;
+  el.style.fontSize = `${size}px`;
+  while (size > minPx && (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth)) {
+    size -= 0.5;
+    el.style.fontSize = `${size}px`;
+  }
 }
 
 function colorToCss(colorName) {
@@ -91,7 +101,7 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
     tag.style.top = `${y}%`;
     tag.innerHTML = `
       <div class="slot">${hueco}</div>
-      <div class="brand">${row ? safeAbbrev(row.fabricante) : ""}</div>
+      <div class="brand">${row ? fullBrand(row.fabricante) : ""}</div>
       <div class="mat">${row ? `${row.materialGeneral}${row.color ? " · " + row.color : ""}` : ""}</div>
     `;
     slots.appendChild(tag);
@@ -99,6 +109,10 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
   fig.appendChild(slots);
 
   card.appendChild(fig);
+  requestAnimationFrame(() => {
+    card.querySelectorAll(".ams-tag .brand").forEach(el => fitText(el, 5.5, 8.8));
+    card.querySelectorAll(".ams-tag .mat").forEach(el => fitText(el, 5.2, 7.4));
+  });
   return card;
 }
 
@@ -211,12 +225,17 @@ function renderShelf(containerId, location, baseFile, size, boxes) {
     label.innerHTML = `
       <div class="slot-code">${hueco}</div>
       <div class="slot-brand">${row ? fullBrand(row.fabricante) : ""}</div>
-      <div class="slot-mat">${row ? `${row.materialGeneral} · ${row.color}` : ""}</div>
+      <div class="slot-mat">${row ? `${row.materialGeneral}${row.color ? " · " + row.color : ""}` : ""}</div>
     `;
 
     overlay.appendChild(circleWrap);
     overlay.appendChild(label);
     root.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+      fitText(label.querySelector(".slot-brand"), 6.2, 10.4);
+      fitText(label.querySelector(".slot-mat"), 5.8, 9.2);
+    });
   });
 }
 
