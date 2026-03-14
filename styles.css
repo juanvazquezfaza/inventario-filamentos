@@ -1,4 +1,3 @@
-
 :root{
   --bg:#0f1115;
   --panel:#171c22;
@@ -31,7 +30,7 @@ body{
 }
 .ams-row{
   display:flex;
-  gap:8px;
+  gap:6px;
   justify-content:flex-start;
   align-items:flex-end;
   flex-wrap:nowrap;
@@ -59,7 +58,9 @@ body{
 .ht-card{width:128px;min-width:128px}
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
-.ams-row .ams2-card:last-child{margin-left:-10px}
+.ams-row .ht-card + .ams2-card{margin-left:2px}
+.ams-row .ams2-card + .ams2-card{margin-left:-18px}
+.ams-row .ams2-card:last-child{margin-left:-34px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
@@ -95,7 +96,7 @@ body{
   display:flex;
   gap:14px;
   margin-top:8px;
-  align-items:stretch;
+  align-items:flex-start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
@@ -107,6 +108,9 @@ body{
   align-items:center;
   justify-content:flex-start;
   min-width:0;
+  height:fit-content;
+  align-self:flex-start;
+  overflow:visible;
 }
 .shelf-panel:first-child{flex:1550 1 0}
 .shelf-panel:last-child{flex:3086 1 0}
@@ -117,7 +121,7 @@ body{
   flex:0 0 auto;
   transform:scaleY(0.66);
   transform-origin:top center;
-  margin-bottom:-25%;
+  margin-bottom:-34%;
 }
 .shelf-visual img.base{width:100%;height:auto;display:block}
 .slot-overlay{position:absolute}
@@ -158,7 +162,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   :root{--ams-h: clamp(132px, 17.2vh, 156px); --tag-w:52px; --tag-h:48px}
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
-  .shelf-visual{transform:scaleY(0.64);margin-bottom:-27%}
+  .shelf-visual{transform:scaleY(0.64);margin-bottom:-36%}
   .slot-label{width:74%;top:37.1%}
 }
 @media (max-width: 1600px){
@@ -167,7 +171,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ht-card{width:116px;min-width:116px}
   .shelf-panel:first-child{flex:1.55 1 0}
   .shelf-panel:last-child{flex:3.086 1 0}
-  .shelf-visual{transform:scaleY(0.61);margin-bottom:-29%}
+  .shelf-visual{transform:scaleY(0.61);margin-bottom:-39%}
   .slot-circle-wrap{width:29%}
   .slot-label{width:72%;top:37.6%}
   .slot-label .slot-code{font-size:11px}
