@@ -19,63 +19,54 @@ body{
 .page{
   max-width:1920px;
   margin:0 auto;
-  padding:8px 12px 14px;
+  padding:12px 14px 20px;
 }
 .title-chip{
   width:max-content;
-  margin:0 auto 8px;
-  padding:7px 15px;
+  margin:0 auto 10px;
+  padding:8px 16px;
   background:#07090d;
   color:#fff;
   border-radius:14px;
   font-weight:800;
-  font-size:17px;
+  font-size:18px;
   letter-spacing:.2px;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 .visual-board{
-  background:rgba(15,17,21,.24);
+  background:rgba(15,17,21,.28);
   border:1px solid rgba(255,255,255,.06);
   border-radius:22px;
-  padding:8px;
+  padding:10px;
   backdrop-filter: blur(4px);
 }
 .ams-row{
   display:grid;
-  grid-template-columns: 0.42fr 0.42fr 1fr 1fr 1fr;
-  gap:10px;
+  grid-template-columns: 0.56fr 0.56fr 1fr 1fr 1fr;
+  gap:12px;
   align-items:end;
 }
 .ams-card{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:7px 7px 3px;
+  padding:8px 8px 4px;
   height:100%;
 }
 .ams-title{
   text-align:center;
   font-weight:800;
-  font-size:15px;
-  margin-bottom:4px;
+  font-size:16px;
+  margin-bottom:6px;
 }
 .ams-figure{
   position:relative;
-  width:fit-content;
-  max-width:100%;
-  margin:0 auto;
+  width:100%;
 }
 .ams-figure img.base{
   display:block;
-  width:auto;
-  height:126px;
-  max-width:100%;
-}
-.ht-card .ams-figure img.base{
-  height:126px;
-}
-.ams2-card .ams-figure img.base{
-  height:126px;
+  width:100%;
+  height:auto;
 }
 .ams-fill{
   position:absolute;
@@ -98,11 +89,11 @@ body{
 }
 .ams-tag{
   position:absolute;
-  min-width:52px;
-  max-width:72px;
-  padding:5px 6px;
-  border-radius:11px;
-  background:rgba(54,58,62,.46);
+  min-width:54px;
+  max-width:76px;
+  padding:6px 7px;
+  border-radius:12px;
+  background:rgba(54,58,62,.50);
   backdrop-filter: blur(2px);
   border:1px solid rgba(255,255,255,.16);
   color:#fff;
@@ -112,27 +103,27 @@ body{
   transform:translateX(-50%);
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.ams-tag .slot{font-size:12px; margin-bottom:2px;}
-.ams-tag .brand{font-size:10px; font-weight:700; opacity:.95; margin-bottom:1px;}
-.ams-tag .mat{font-size:9px; font-weight:600; opacity:.96;}
+.ams-tag .slot{font-size:13px; margin-bottom:3px;}
+.ams-tag .brand{font-size:11px; font-weight:700; opacity:.95; margin-bottom:2px;}
+.ams-tag .mat{font-size:10px; font-weight:600; opacity:.96;}
 .shelves-row{
   display:grid;
-  grid-template-columns: 1fr 2fr;
-  gap:12px;
-  margin-top:10px;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
+  margin-top:12px;
   align-items:start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px 8px 8px;
+  padding:8px 8px 10px;
 }
 .shelf-title{
   text-align:center;
   font-weight:800;
-  font-size:15px;
-  margin-bottom:6px;
+  font-size:16px;
+  margin-bottom:8px;
 }
 .shelf-visual{
   position:relative;
@@ -150,7 +141,7 @@ body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:22%;
+  width:23%;
   aspect-ratio:1/1;
   top:6%;
   border-radius:999px;
@@ -170,20 +161,20 @@ body{
 .slot-label{
   position:absolute;
   left:50%;
-  top:56%;
+  top:52%;
   transform:translateX(-50%);
   width:84%;
   padding:5px 6px 6px;
   border-radius:11px;
-  background:rgba(54,58,62,.34);
+  background:rgba(54,58,62,.36);
   border:1px solid rgba(255,255,255,.14);
   text-align:center;
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:10px;font-weight:800;line-height:1.05;margin-bottom:2px;}
-.slot-label .slot-brand{font-size:9px;font-weight:800;line-height:1.05;margin-bottom:1px;}
-.slot-label .slot-mat{font-size:8px;font-weight:600;line-height:1.08;}
+.slot-label .slot-code{font-size:11px;font-weight:800;line-height:1.05;margin-bottom:2px;}
+.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.05;margin-bottom:1px;}
+.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;}
 .editor-panel{
   margin-top:18px;
   background:rgba(18,23,29,.82);
@@ -270,8 +261,3 @@ textarea{width:100%}
 
 #shelf1Visual{width:50.22%;margin:0 auto;}
 #shelf2Visual{width:100%;margin:0 auto;}
-
-@media (max-width: 1200px){
-  .ams-row{grid-template-columns:1fr 1fr;gap:10px;}
-  .shelves-row{grid-template-columns:1fr;}
-}
