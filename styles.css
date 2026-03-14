@@ -1,3 +1,4 @@
+
 :root{
   --bg:#0f1115;
   --panel:#171c22;
@@ -5,8 +6,7 @@
   --muted:#b7c1cd;
   --accent:#f39a45;
   --navy:#1c334e;
-  --ams-h: clamp(88px, 12.5vh, 106px);
-  --shelf-h: clamp(300px, 40vh, 370px);
+  --ams-h: clamp(96px, 13vh, 118px);
 }
 *{box-sizing:border-box}
 body{
@@ -18,12 +18,12 @@ body{
 .page{
   max-width:1920px;
   margin:0 auto;
-  padding:4px 8px 10px;
+  padding:6px 10px 12px;
 }
 .title-chip{
   width:max-content;
-  margin:0 auto 4px;
-  padding:6px 14px;
+  margin:0 auto 6px;
+  padding:7px 16px;
   background:#07090d;
   color:#fff;
   border-radius:14px;
@@ -36,23 +36,22 @@ body{
   background:rgba(15,17,21,.24);
   border:1px solid rgba(255,255,255,.06);
   border-radius:22px;
-  padding:6px;
+  padding:8px;
   backdrop-filter: blur(4px);
 }
 .ams-row{
   display:flex;
-  gap:6px;
+  gap:10px;
   justify-content:center;
   align-items:flex-end;
   flex-wrap:nowrap;
 }
-.ams-row .ams2-card:first-of-type{margin-left:10px;}
 .ams-card{
   flex:0 0 auto;
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:5px 5px 2px;
+  padding:6px 6px 3px;
 }
 .ams-title{
   text-align:center;
@@ -70,8 +69,8 @@ body{
   width:100%;
   height:100%;
 }
-.ht-card{min-width:124px; width:124px}
-.ams2-card{min-width:286px; width:286px}
+.ht-card{min-width:110px; width:110px}
+.ams2-card{min-width:344px; width:344px}
 .ams-fill{
   position:absolute;
   inset:0;
@@ -89,11 +88,11 @@ body{
 .ams-slots{position:absolute;inset:0;pointer-events:none}
 .ams-tag{
   position:absolute;
-  min-width:52px;
-  max-width:64px;
-  padding:4px 5px;
+  min-width:56px;
+  max-width:82px;
+  padding:4px 6px 5px;
   border-radius:11px;
-  background:rgba(54,58,62,.46);
+  background:rgba(54,58,62,.48);
   backdrop-filter: blur(2px);
   border:1px solid rgba(255,255,255,.16);
   color:#fff;
@@ -103,22 +102,22 @@ body{
   transform:translateX(-50%);
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
+.ht-card .ams-tag{max-width:60px; min-width:52px;}
 .ams-tag .slot{font-size:11px; margin-bottom:1px;}
 .ams-tag .brand{font-size:9px; font-weight:700; opacity:.95; margin-bottom:1px;}
 .ams-tag .mat{font-size:8px; font-weight:600; opacity:.96; line-height:1.05;}
 .shelves-row{
   display:grid;
-  grid-template-columns:minmax(300px,0.75fr) minmax(560px,1.25fr);
-  gap:12px;
-  margin-top:6px;
+  grid-template-columns:minmax(430px,1fr) minmax(860px,2fr);
+  gap:16px;
+  margin-top:8px;
   align-items:start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:6px;
-  min-height:calc(var(--shelf-h) + 30px);
+  padding:8px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -127,16 +126,17 @@ body{
   text-align:center;
   font-weight:800;
   font-size:14px;
-  margin-bottom:4px;
+  margin-bottom:6px;
 }
 .shelf-visual{
   position:relative;
-  height:var(--shelf-h);
+  width:100%;
+  height:auto;
   flex:0 0 auto;
 }
 .shelf-visual img.base{
   width:100%;
-  height:100%;
+  height:auto;
   display:block;
 }
 .slot-overlay{position:absolute}
@@ -144,9 +144,9 @@ body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:31%;
+  width:38%;
   aspect-ratio:1/1;
-  top:4%;
+  top:2.2%;
   border-radius:999px;
   background:#f6f6f6;
   border:2px solid #1c334e;
@@ -156,28 +156,28 @@ body{
   box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{
-  width:82%;
-  height:82%;
+  width:84%;
+  height:84%;
   border-radius:999px;
   background:#bbb;
 }
 .slot-label{
   position:absolute;
   left:50%;
-  top:66%;
+  top:69%;
   transform:translateX(-50%);
-  width:82%;
-  padding:4px 5px 5px;
+  width:84%;
+  padding:5px 6px 6px;
   border-radius:11px;
-  background:rgba(54,58,62,.30);
+  background:rgba(54,58,62,.38);
   border:1px solid rgba(255,255,255,.14);
   text-align:center;
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:9px;font-weight:800;line-height:1.03;margin-bottom:1px}
-.slot-label .slot-brand{font-size:8px;font-weight:800;line-height:1.03;margin-bottom:1px}
-.slot-label .slot-mat{font-size:7px;font-weight:600;line-height:1.02}
+.slot-label .slot-code{font-size:10px;font-weight:800;line-height:1.03;margin-bottom:1px}
+.slot-label .slot-brand{font-size:9px;font-weight:800;line-height:1.03;margin-bottom:1px}
+.slot-label .slot-mat{font-size:8px;font-weight:600;line-height:1.02}
 .editor-panel{
   margin-top:10px;
   background:rgba(18,23,29,.82);
@@ -199,10 +199,18 @@ th{position:sticky;top:0;background:#121920;z-index:1;font-size:13px;text-align:
 input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;border-radius:10px;padding:8px 10px;font:inherit}
 textarea{width:100%}
 .small-btn{background:#2a3340;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 10px;cursor:pointer}
-@media (max-width: 1300px){
-  :root{--shelf-h: clamp(280px, 36vh, 330px);}
+@media (max-width: 1380px){
+  .page{padding:4px 8px 10px}
+  .ams-row{gap:8px}
+  .ht-card{width:100px;min-width:100px}
+  .ams2-card{width:312px;min-width:312px}
+  .shelves-row{grid-template-columns:minmax(360px,.95fr) minmax(720px,1.9fr);gap:12px}
+  .slot-circle-wrap{width:34%}
+  .slot-label{top:68%;width:82%}
+}
+@media (max-width: 1220px){
   .ams-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .ht-card,.ams2-card{min-width:0}
+  .ht-card,.ams2-card{min-width:0;width:auto}
   .shelves-row{grid-template-columns:1fr}
   .shelf-panel{min-height:auto}
 }
