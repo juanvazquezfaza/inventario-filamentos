@@ -70,7 +70,7 @@ body{
   height:100%;
 }
 .ht-card{min-width:126px; width:126px}
-.ams2-card{min-width:454px; width:454px}
+.ams2-card{min-width:498px; width:498px}
 .ams-fill{
   position:absolute;
   inset:0;
@@ -86,11 +86,11 @@ body{
   mask-size:100% 100%;
 }
 .ams-slots{position:absolute;inset:0;pointer-events:none}
-.ams-tag{
+ .ams-tag{
   position:absolute;
-  min-width:50px;
-  max-width:64px;
-  padding:4px 5px 5px;
+  min-width:46px;
+  max-width:56px;
+  padding:4px 4px 5px;
   border-radius:11px;
   background:rgba(54,58,62,.48);
   backdrop-filter: blur(2px);
@@ -102,23 +102,23 @@ body{
   transform:translateX(-50%);
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.ht-card .ams-tag{max-width:50px; min-width:44px;}
-.ams-tag .slot{font-size:11px; margin-bottom:1px;}
-.ams-tag .brand{font-size:8px; font-weight:700; opacity:.95; margin-bottom:1px;}
-.ams-tag .mat{font-size:7px; font-weight:600; opacity:.96; line-height:1.03;}
+.ht-card .ams-tag{max-width:48px; min-width:40px;}
+.ams-tag .slot{font-size:10px; margin-bottom:1px;}
+.ams-tag .brand{font-size:7px; font-weight:700; opacity:.95; margin-bottom:1px;}
+.ams-tag .mat{font-size:6px; font-weight:600; opacity:.96; line-height:1.02;}
 .shelves-row{
   display:grid;
   min-height:0;
   grid-template-columns:minmax(620px,1fr) minmax(1180px,2fr);
   gap:16px;
-  margin-top:10px;
+  margin-top:8px;
   align-items:start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px;
+  padding:8px 8px 4px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -127,16 +127,16 @@ body{
   text-align:center;
   font-weight:800;
   font-size:14px;
-  margin-bottom:8px;
+  margin-bottom:5px;
 }
 .shelf-visual{
   position:relative;
   width:100%;
   height:auto;
   flex:0 0 auto;
-  transform:scaleY(0.9);
+  transform:scaleY(0.78);
   transform-origin:top center;
-  margin-bottom:-9%;
+  margin-bottom:-21%;
 }
 .shelf-visual img.base{
   width:100%;
@@ -148,9 +148,9 @@ body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:50%;
+  width:54%;
   aspect-ratio:1/1;
-  top:2.4%;
+  top:4.2%;
   border-radius:999px;
   background:#f6f6f6;
   border:2px solid #1c334e;
@@ -160,18 +160,18 @@ body{
   box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{
-  width:88%;
-  height:88%;
+  width:90%;
+  height:90%;
   border-radius:999px;
   background:#bbb;
 }
 .slot-label{
   position:absolute;
   left:50%;
-  top:74%;
+  top:67%;
   transform:translateX(-50%);
-  width:90%;
-  padding:6px 7px 7px;
+  width:84%;
+  padding:5px 6px 6px;
   border-radius:11px;
   background:rgba(54,58,62,.38);
   border:1px solid rgba(255,255,255,.14);
@@ -179,9 +179,9 @@ body{
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:10px;font-weight:800;line-height:1.03;margin-bottom:1px}
-.slot-label .slot-brand{font-size:9px;font-weight:800;line-height:1.03;margin-bottom:1px}
-.slot-label .slot-mat{font-size:8px;font-weight:600;line-height:1.02}
+.slot-label .slot-code{font-size:9px;font-weight:800;line-height:1.02;margin-bottom:1px}
+.slot-label .slot-brand{font-size:8px;font-weight:800;line-height:1.02;margin-bottom:1px}
+.slot-label .slot-mat{font-size:7px;font-weight:600;line-height:1.01}
 .editor-panel{
   margin-top:6px;
   background:rgba(18,23,29,.82);
@@ -207,10 +207,10 @@ textarea{width:100%}
   .page{padding:4px 8px 10px}
   .ams-row{gap:8px}
   .ht-card{width:118px;min-width:118px}
-  .ams2-card{width:420px;min-width:420px}
+  .ams2-card{width:462px;min-width:462px}
   .shelves-row{grid-template-columns:minmax(560px,1fr) minmax(1040px,2fr);gap:14px}
-  .slot-circle-wrap{width:42%}
-  .slot-label{top:73%;width:88%}
+  .slot-circle-wrap{width:46%}
+  .slot-label{top:66%;width:82%}
 }
 @media (max-width: 1220px){
   .ams-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
