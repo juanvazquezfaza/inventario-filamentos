@@ -12,6 +12,10 @@ function safeAbbrev(name) {
   return config.abbrev[name] || name.slice(0, 3).toUpperCase();
 }
 
+function fullBrand(name) {
+  return name || "";
+}
+
 function colorToCss(colorName) {
   return config.colorHex[colorName] || "#cccccc";
 }
@@ -206,7 +210,7 @@ function renderShelf(containerId, location, baseFile, size, boxes) {
     label.className = "slot-label";
     label.innerHTML = `
       <div class="slot-code">${hueco}</div>
-      <div class="slot-brand">${row ? safeAbbrev(row.fabricante) : ""}</div>
+      <div class="slot-brand">${row ? fullBrand(row.fabricante) : ""}</div>
       <div class="slot-mat">${row ? `${row.materialGeneral} · ${row.color}` : ""}</div>
     `;
 

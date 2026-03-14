@@ -86,10 +86,10 @@ body{
   mask-size:100% 100%;
 }
 .ams-slots{position:absolute;inset:0;pointer-events:none}
- .ams-tag{
+  .ams-tag{
   position:absolute;
-  min-width:42px;
-  max-width:52px;
+  min-width:38px;
+  max-width:46px;
   padding:4px 4px 5px;
   border-radius:11px;
   background:rgba(54,58,62,.48);
@@ -109,7 +109,7 @@ body{
 .shelves-row{
   display:grid;
   min-height:0;
-  grid-template-columns:minmax(560px,1fr) minmax(1080px,2fr);
+  grid-template-columns:minmax(490px,1fr) minmax(1010px,2fr);
   gap:16px;
   margin-top:8px;
   align-items:start;
@@ -118,7 +118,7 @@ body{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px 8px 4px;
+  padding:8px 8px 6px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -134,9 +134,9 @@ body{
   width:100%;
   height:auto;
   flex:0 0 auto;
-  transform:scaleY(0.78);
+  transform:scaleY(0.76);
   transform-origin:top center;
-  margin-bottom:-19%;
+  margin-bottom:-17%;
 }
 .shelf-visual img.base{
   width:100%;
@@ -148,9 +148,9 @@ body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:46%;
+  width:42%;
   aspect-ratio:1/1;
-  top:5.2%;
+  top:6.5%;
   border-radius:999px;
   background:#f6f6f6;
   border:2px solid #1c334e;
@@ -160,18 +160,18 @@ body{
   box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{
-  width:86%;
-  height:86%;
+  width:84%;
+  height:84%;
   border-radius:999px;
   background:#bbb;
 }
 .slot-label{
   position:absolute;
   left:50%;
-  top:68%;
+  top:69.5%;
   transform:translateX(-50%);
-  width:76%;
-  padding:4px 5px 5px;
+  width:74%;
+  padding:6px 6px 7px;
   border-radius:11px;
   background:rgba(54,58,62,.38);
   border:1px solid rgba(255,255,255,.14);
@@ -179,9 +179,9 @@ body{
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:9px;font-weight:800;line-height:1.02;margin-bottom:1px}
-.slot-label .slot-brand{font-size:8px;font-weight:800;line-height:1.02;margin-bottom:1px}
-.slot-label .slot-mat{font-size:7px;font-weight:600;line-height:1.01}
+.slot-label .slot-code{font-size:10px;font-weight:800;line-height:1.04;margin-bottom:2px}
+.slot-label .slot-brand{font-size:8.6px;font-weight:800;line-height:1.08;margin-bottom:2px;white-space:normal;overflow-wrap:anywhere}
+.slot-label .slot-mat{font-size:7.6px;font-weight:600;line-height:1.05;white-space:normal;overflow-wrap:anywhere}
 .editor-panel{
   margin-top:6px;
   background:rgba(18,23,29,.82);
@@ -208,9 +208,9 @@ textarea{width:100%}
   .ams-row{gap:8px}
   .ht-card{width:118px;min-width:118px}
   .ams2-card{width:510px;min-width:510px}
-  .shelves-row{grid-template-columns:minmax(520px,1fr) minmax(980px,2fr);gap:14px}
-  .slot-circle-wrap{width:40%}
-  .slot-label{top:67%;width:74%}
+  .shelves-row{grid-template-columns:minmax(455px,1fr) minmax(945px,2fr);gap:14px}
+  .slot-circle-wrap{width:38%}
+  .slot-label{top:68.5%;width:72%}
 }
 @media (max-width: 1220px){
   .ams-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
