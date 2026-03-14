@@ -4,16 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f1115" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Filamentos" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <title>Inventario visual de filamentos</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <title>Inventario visual de filamentos</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div class="page">
+    <div class="title-chip">Inventario visual de filamentos</div>
+
+    <section class="visual-board">
+      <div id="amsRow" class="ams-row"></div>
+      <div class="shelves-row">
+        <div class="shelf-panel">
+          <div class="shelf-title">Estantería *1</div>
+          <div id="shelf1Visual" class="shelf-visual"></div>
+        </div>
+        <div class="shelf-panel">
+          <div class="shelf-title">Estantería *2</div>
+          <div id="shelf2Visual" class="shelf-visual"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editor-panel">
+      <div class="panel-head">
+        <div>
+          <h2>Inventario editable</h2>
+          <p>Cambia fabricante, material, variante, color, ubicación y hueco. El dibujo se actualiza al instante.</p>
+        </div>
+        <div class="panel-actions">
+          <button id="addRowBtn" class="btn btn-primary">Añadir fila</button>
+          <button id="resetBtn" class="btn">Reiniciar demo</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Fabricante</th>
+              <th>Material general</th>
+              <th>Variante</th>
+              <th>Color</th>
+              <th>Ubicación</th>
+              <th>Hueco</th>
+              <th>Estado</th>
+              <th>Notas</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>
