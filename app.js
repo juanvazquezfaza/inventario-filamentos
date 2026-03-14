@@ -42,7 +42,7 @@ function getRow(location, hueco) {
 
 function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
   const card = document.createElement("div");
-  card.className = "ams-card";
+  card.className = `ams-card ${type === "ht" ? "ht-card" : "ams2-card"}`;
 
   const titleEl = document.createElement("div");
   titleEl.className = "ams-title";
@@ -77,7 +77,7 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
       : config.visual.ams2Pro.masks[i].bbox;
     const baseSize = type === "ht" ? config.visual.amsHt.size : config.visual.ams2Pro.size;
     const centerX = ((bbox[0] + bbox[2]) / 2) / baseSize[0] * 100;
-    const y = type === "ht" ? 58 : 58;
+    const y = type === "ht" ? 60 : 60;
 
     const tag = document.createElement("div");
     tag.className = "ams-tag";

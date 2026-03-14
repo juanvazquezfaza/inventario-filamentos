@@ -19,38 +19,38 @@ body{
 .page{
   max-width:1920px;
   margin:0 auto;
-  padding:18px 20px 28px;
+  padding:12px 14px 20px;
 }
 .title-chip{
   width:max-content;
-  margin:0 auto 14px;
-  padding:10px 18px;
+  margin:0 auto 10px;
+  padding:8px 16px;
   background:#07090d;
   color:#fff;
   border-radius:14px;
   font-weight:800;
-  font-size:20px;
+  font-size:18px;
   letter-spacing:.2px;
   box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 .visual-board{
-  background:rgba(15,17,21,.35);
+  background:rgba(15,17,21,.28);
   border:1px solid rgba(255,255,255,.06);
   border-radius:22px;
-  padding:14px;
+  padding:10px;
   backdrop-filter: blur(4px);
 }
 .ams-row{
   display:grid;
-  grid-template-columns: 0.85fr 0.85fr 1.2fr 1.2fr 1.2fr;
-  gap:16px;
+  grid-template-columns: 0.56fr 0.56fr 1fr 1fr 1fr;
+  gap:12px;
   align-items:end;
 }
 .ams-card{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:10px 10px 6px;
+  border-radius:18px;
+  padding:8px 8px 4px;
   height:100%;
 }
 .ams-title{
@@ -109,14 +109,15 @@ body{
 .shelves-row{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:16px;
-  margin-top:16px;
+  gap:14px;
+  margin-top:12px;
+  align-items:start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:10px 10px 12px;
+  border-radius:18px;
+  padding:8px 8px 10px;
 }
 .shelf-title{
   text-align:center;
@@ -140,9 +141,9 @@ body{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:26%;
+  width:23%;
   aspect-ratio:1/1;
-  top:5%;
+  top:6%;
   border-radius:999px;
   background:#f6f6f6;
   border:2px solid #1c334e;
@@ -152,28 +153,28 @@ body{
   box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{
-  width:74%;
-  height:74%;
+  width:76%;
+  height:76%;
   border-radius:999px;
   background:#bbb;
 }
 .slot-label{
   position:absolute;
   left:50%;
-  top:47%;
+  top:52%;
   transform:translateX(-50%);
-  width:88%;
-  padding:6px 6px 7px;
-  border-radius:12px;
-  background:rgba(54,58,62,.42);
-  border:1px solid rgba(255,255,255,.16);
+  width:84%;
+  padding:5px 6px 6px;
+  border-radius:11px;
+  background:rgba(54,58,62,.36);
+  border:1px solid rgba(255,255,255,.14);
   text-align:center;
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:12px;font-weight:800;line-height:1.05;margin-bottom:2px;}
-.slot-label .slot-brand{font-size:11px;font-weight:800;line-height:1.05;margin-bottom:2px;}
-.slot-label .slot-mat{font-size:10px;font-weight:600;line-height:1.1;}
+.slot-label .slot-code{font-size:11px;font-weight:800;line-height:1.05;margin-bottom:2px;}
+.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.05;margin-bottom:1px;}
+.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;}
 .editor-panel{
   margin-top:18px;
   background:rgba(18,23,29,.82);
@@ -249,3 +250,14 @@ textarea{width:100%}
   .ams-row{grid-template-columns:1fr 1fr;gap:12px}
   .shelves-row{grid-template-columns:1fr}
 }
+
+.ams-card.ht-card .ams-figure{width:68%;margin:0 auto;}
+.ams-card.ams2-card .ams-figure{width:100%;}
+.ams-card.ht-card .ams-title,.ams-card.ams2-card .ams-title{font-size:14px;}
+.ams-card.ht-card .ams-tag{min-width:48px;max-width:62px;padding:5px 5px;}
+.ams-card.ht-card .ams-tag .slot{font-size:12px;}
+.ams-card.ht-card .ams-tag .brand{font-size:10px;}
+.ams-card.ht-card .ams-tag .mat{font-size:9px;}
+
+#shelf1Visual{width:50.22%;margin:0 auto;}
+#shelf2Visual{width:100%;margin:0 auto;}
