@@ -1,7 +1,7 @@
 {
   "appTitle": "Inventario de Filamentos",
-  "appSubtitle": "Formato Excel con dibujos de AMS y estanterías",
-  "storageKey": "juanjo-filaments-pwa-static-v1",
+  "appSubtitle": "Inventario visual de AMS y estanterías",
+  "storageKey": "juanjo-filaments-pwa-static-v2",
   "brands": [
     "Bambu Lab",
     "Prusament",
@@ -59,28 +59,58 @@
   ],
   "groups": [
     {
+      "name": "AMS HT #1",
+      "type": "ams",
+      "variant": "amsht",
+      "drawing": "drawings/ams-ht-real-base.png",
+      "slots": [
+        "HT-A"
+      ]
+    },
+    {
+      "name": "AMS HT #2",
+      "type": "ams",
+      "variant": "amsht",
+      "drawing": "drawings/ams-ht-real-base.png",
+      "slots": [
+        "HT-A"
+      ]
+    },
+    {
       "name": "AMS 2 Pro #1",
       "type": "ams",
-      "drawing": "drawings/ams-2pro.svg",
-      "slots": ["A1", "A2", "A3", "A4"]
+      "variant": "ams2pro",
+      "drawing": "drawings/ams-2pro-real-base.png",
+      "slots": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
     },
     {
       "name": "AMS 2 Pro #2",
       "type": "ams",
-      "drawing": "drawings/ams-2pro.svg",
-      "slots": ["B1", "B2", "B3", "B4"]
+      "variant": "ams2pro",
+      "drawing": "drawings/ams-2pro-real-base.png",
+      "slots": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
     },
     {
       "name": "AMS 2 Pro #3",
       "type": "ams",
-      "drawing": "drawings/ams-2pro.svg",
-      "slots": ["C1", "C2", "C3", "C4"]
-    },
-    {
-      "name": "AMS HT",
-      "type": "ams",
-      "drawing": "drawings/ams-ht.svg",
-      "slots": ["S1"]
+      "variant": "ams2pro",
+      "drawing": "drawings/ams-2pro-real-base.png",
+      "slots": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ]
     },
     {
       "name": "Estantería Derecha",

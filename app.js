@@ -24,12 +24,28 @@ const COLOR_MAP = {
   multicolor: "linear-gradient(135deg,#ff4d4d,#ffcc00,#4cd137,#3498db,#9b59b6)",
 };
 
+const DEVICE_LAYOUTS = {
+  ams2pro: {
+    colorSlots: [
+      { left: 5.2, top: 9.5, width: 21.8, height: 68.5, labelLeft: 9.3, labelTop: 54.5, labelWidth: 16.7, labelHeight: 28.5 },
+      { left: 26.3, top: 9.5, width: 21.8, height: 68.5, labelLeft: 27.7, labelTop: 54.5, labelWidth: 16.7, labelHeight: 28.5 },
+      { left: 47.5, top: 9.5, width: 21.8, height: 68.5, labelLeft: 46.1, labelTop: 54.5, labelWidth: 16.7, labelHeight: 28.5 },
+      { left: 68.8, top: 9.5, width: 21.8, height: 68.5, labelLeft: 64.5, labelTop: 54.5, labelWidth: 16.7, labelHeight: 28.5 }
+    ]
+  },
+  amsht: {
+    colorSlots: [
+      { left: 19.8, top: 8.5, width: 34.5, height: 69.5, labelLeft: 18.7, labelTop: 53.2, labelWidth: 19.5, labelHeight: 28.5 }
+    ]
+  }
+};
+
 let config = null;
 let baseInventory = [];
 let rows = [];
 let searchValue = "";
 let filterGroup = "Todas";
-let storageKey = "juanjo-filaments-pwa-static-v1";
+let storageKey = "juanjo-filaments-pwa-static-v2";
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -48,10 +64,9 @@ function colorStyle(color) {
   return `background:${COLOR_MAP[color] || "#d1d5db"};`;
 }
 
-function textColor(color) {
-  return ["negro", "morado", "azul", "marrón", "carbon", "rojo"].includes(color)
-    ? "color:#ffffff;"
-    : "color:#111827;";
+function tintStyle(color) {
+  if (color === "multicolor") return `background:${COLOR_MAP[color]};`;
+  return `background:${COLOR_MAP[color] || "#d1d5db"};`;
 }
 
 function getGroup(name) {
@@ -70,16 +85,29 @@ function parseUbicacion(rawValue) {
   const raw = String(rawValue || "").trim();
   if (!raw) return { grupo: config.groups[0]?.name || "Otro", hueco: "" };
 
-  const amsMatch = config.groups.find((g) => g.type === "ams" && raw.includes(g.name));
-  if (amsMatch) {
-    const foundSlot = (amsMatch.slots || []).find((slot) => raw.includes(slot));
-    return { grupo: amsMatch.name, hueco: foundSlot || amsMatch.slots?.[0] || "" };
+  const match = config.groups.find((g) => raw.includes(g.name));
+  if (match) {
+    const foundSlot = (match.slots || []).find((slot) => raw.includes(slot));
+    return { grupo: match.name, hueco: foundSlot || match.slots?.[0] || "" };
   }
 
-  const exactGroup = config.groups.find((g) => raw.includes(g.name));
-  if (exactGroup) return { grupo: exactGroup.name, hueco: "" };
+  const ams2 = raw.match(/AMS 2 Pro #([123])/i);
+  if (ams2) {
+    const groupName = `AMS 2 Pro #${ams2[1]}`;
+    const foundSlot = raw.match(/A[1-4]/i)?.[0]?.toUpperCase() || "A1";
+    return { grupo: groupName, hueco: foundSlot };
+  }
 
-  return { grupo: config.groups[0]?.name || "Otro", hueco: "" };
+  const amsHt = raw.match(/AMS HT(?: #([12]))?/i);
+  if (amsHt) {
+    const idx = amsHt[1] || "1";
+    return { grupo: `AMS HT #${idx}`, hueco: "HT-A" };
+  }
+
+  if (raw.includes("Estantería Izquierda")) return { grupo: "Estantería Izquierda", hueco: "" };
+  if (raw.includes("Exterior")) return { grupo: "Exterior", hueco: "" };
+  if (raw.includes("Otro")) return { grupo: "Otro", hueco: "" };
+  return { grupo: "Estantería Derecha", hueco: "" };
 }
 
 function loadRows() {
@@ -100,17 +128,6 @@ function saveRows() {
   localStorage.setItem(storageKey, JSON.stringify(rows));
 }
 
-function stats() {
-  const amsCount = rows.filter((r) => getGroup(r.grupo)?.type === "ams").length;
-  const shelfGroups = config.groups.filter((g) => g.type === "shelf");
-  return {
-    total: rows.length,
-    ams: amsCount,
-    shelf1: shelfGroups[0] ? rows.filter((r) => r.grupo === shelfGroups[0].name).length : 0,
-    shelf2: shelfGroups[1] ? rows.filter((r) => r.grupo === shelfGroups[1].name).length : 0,
-  };
-}
-
 function filteredRows() {
   const q = searchValue.trim().toLowerCase();
   return rows.filter((row) => {
@@ -128,112 +145,59 @@ function cellSelect(value, options, onChange) {
   return `<select class="select js-change" data-change="${onChange}">${opts}</select>`;
 }
 
-function slotBox(label, item, compact = false) {
-  const boxClass = compact ? "slot-box compact" : "slot-box";
-  const emptyClass = compact ? "slot-empty compact" : "slot-empty";
-  const colorClass = compact ? "slot-color compact" : "slot-color";
-  const brandClass = compact ? "slot-brand compact" : "slot-brand";
-
-  if (!item) {
-    return `
-      <div class="${boxClass}">
-        <div class="slot-top"><span class="pill">${escapeHtml(label)}</span></div>
-        <div class="${emptyClass}">Libre</div>
-      </div>`;
+function renderDeviceLabel(slot, item, variant, layout) {
+  const lines = [];
+  lines.push(`<span class="ams-label-slot">${escapeHtml(slot)}</span>`);
+  if (item) {
+    if (variant === "ams2pro") {
+      if (item.material) lines.push(`<span>${escapeHtml(item.material)}</span>`);
+      if (item.color) lines.push(`<span>${escapeHtml(String(item.color).toUpperCase())}</span>`);
+    } else {
+      if (item.color) lines.push(`<span>${escapeHtml(String(item.color).toUpperCase())}</span>`);
+    }
   }
-
-  return `
-    <div class="${boxClass}">
-      <div class="slot-top">
-        <span class="pill">${escapeHtml(label)}</span>
-        <span class="pill dark">${escapeHtml(item.material || "")}</span>
-      </div>
-      <div class="${colorClass}" style="${colorStyle(item.color)}${textColor(item.color)}">${escapeHtml(item.color)}</div>
-      <div class="${brandClass}">${escapeHtml(item.fabricante)}</div>
-      <div class="slot-model">${escapeHtml(item.modelo)}</div>
-      <div class="slot-state">${escapeHtml(item.estado)}</div>
-    </div>`;
+  return `<div class="ams-label" style="left:${layout.labelLeft}%;top:${layout.labelTop}%;width:${layout.labelWidth}%;height:${layout.labelHeight}%;">${lines.join("")}</div>`;
 }
 
-function renderAms(group, options = {}) {
-  const { compact = false, titleOverride = null, itemsOverride = null } = options;
-  const items = itemsOverride || rows.filter((r) => r.grupo === group.name);
+function renderAms(group) {
+  const variant = group.variant || "ams2pro";
+  const layout = DEVICE_LAYOUTS[variant];
+  const items = rows.filter((r) => r.grupo === group.name);
   const bySlot = Object.fromEntries(items.filter((i) => i.hueco).map((i) => [i.hueco, i]));
-  return `
-    <section class="card visual-card ${compact ? "compact-card" : ""}">
-      <div class="visual-title ${compact ? "compact-title" : ""}">${escapeHtml(titleOverride || group.name)}</div>
-      <img src="${escapeHtml(group.drawing)}" alt="${escapeHtml(titleOverride || group.name)}" class="device-drawing ${compact ? "compact-drawing" : ""}" />
-      <div class="slot-grid ${compact ? "compact-grid" : ""}">
-        ${(group.slots || []).map((slot) => slotBox(slot, bySlot[slot], compact)).join("")}
-      </div>
-    </section>`;
-}
-
-function renderShelf(group) {
-  const items = rows.filter((r) => r.grupo === group.name);
-  const levels = Array.from({ length: group.levels || 3 }, (_, i) => i);
-  const perLevel = group.perLevel || 4;
 
   return `
-    <section class="card visual-card">
+    <section class="card visual-card device-card ${variant === "amsht" ? "ht-card" : "pro-card"}">
       <div class="visual-title">${escapeHtml(group.name)}</div>
-      <img src="${escapeHtml(group.drawing)}" alt="${escapeHtml(group.name)}" class="device-drawing" />
-      <div class="shelf-levels">
-        ${levels.map((level) => {
-          const rowItems = items.slice(level * perLevel, level * perLevel + perLevel);
-          return `
-            <div class="shelf-level">
-              <div class="level-title">Nivel ${level + 1}</div>
-              <div class="shelf-grid">
-                ${Array.from({ length: perLevel }, (_, i) => {
-                  const item = rowItems[i];
-                  if (!item) return `<div class="shelf-cell"><div class="mini-empty">Libre</div></div>`;
-                  return `
-                    <div class="shelf-cell">
-                      <div class="mini-spool" style="${colorStyle(item.color)}"></div>
-                      <div class="mini-brand">${escapeHtml(item.fabricante)}</div>
-                      <div class="mini-model">${escapeHtml(item.modelo)}</div>
-                    </div>`;
-                }).join("")}
-              </div>
-            </div>`;
+      <div class="device-stage ${variant}">
+        <img src="${escapeHtml(group.drawing)}" alt="${escapeHtml(group.name)}" class="device-template" />
+        ${layout.colorSlots.map((pos, index) => {
+          const slot = group.slots[index];
+          const item = bySlot[slot];
+          return item ? `
+            <div class="device-color ${variant}" style="left:${pos.left}%;top:${pos.top}%;width:${pos.width}%;height:${pos.height}%;${tintStyle(item.color)}"></div>
+            ${renderDeviceLabel(slot, item, variant, pos)}
+          ` : `
+            ${renderDeviceLabel(slot, null, variant, pos)}
+          `;
         }).join("")}
-      </div>
-    </section>`;
-}
-
-function renderListGroup(group) {
-  const items = rows.filter((r) => r.grupo === group.name);
-  return `
-    <section class="card visual-card">
-      <div class="visual-title">${escapeHtml(group.name)}</div>
-      <div class="muted small" style="margin-bottom:12px;">Ubicación sin dibujo específico.</div>
-      <div class="shelf-grid">
-        ${items.length ? items.map((item) => `
-          <div class="shelf-cell">
-            <div class="mini-spool" style="${colorStyle(item.color)}"></div>
-            <div class="mini-brand">${escapeHtml(item.fabricante)}</div>
-            <div class="mini-model">${escapeHtml(item.modelo)}</div>
-          </div>`).join("") : `<div class="shelf-cell"><div class="mini-empty">Sin bobinas</div></div>`}
       </div>
     </section>`;
 }
 
 function render() {
   const filtered = filteredRows();
-  const amsHtGroup = config.groups.find((g) => g.name === "AMS HT");
-  const amsProGroups = config.groups.filter((g) => g.type === "ams" && g.name !== "AMS HT");
+  const htGroups = config.groups.filter((g) => g.variant === "amsht");
+  const proGroups = config.groups.filter((g) => g.variant === "ams2pro");
 
   app.innerHTML = `
     <div class="page">
       <div class="top-visuals">
         <section class="ht-column">
-          ${amsHtGroup ? renderAms(amsHtGroup, { compact: true, titleOverride: "AMS HT #1" }) : ""}
-          ${amsHtGroup ? renderAms(amsHtGroup, { compact: true, titleOverride: "AMS HT #2", itemsOverride: [] }) : ""}
+          ${htGroups.map((group) => renderAms(group)).join("")}
         </section>
 
         <section class="ams-pro-grid">
-          ${amsProGroups.map((group) => renderAms(group)).join("")}
+          ${proGroups.map((group) => renderAms(group)).join("")}
         </section>
       </div>
 

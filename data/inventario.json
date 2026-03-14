@@ -15,7 +15,7 @@
     "fabricante": "Fiberlogy",
     "modelo": "Easy PET-G",
     "material": "PETG",
-    "color": "blanco",
+    "color": "gris",
     "grupo": "AMS 2 Pro #1",
     "hueco": "A2",
     "estado": "Abierto",
@@ -27,8 +27,8 @@
     "modelo": "PLA Galaxy Silver",
     "material": "PLA",
     "color": "plateado",
-    "grupo": "Estantería Derecha",
-    "hueco": "",
+    "grupo": "AMS 2 Pro #1",
+    "hueco": "A3",
     "estado": "Nuevo",
     "notas": ""
   },
@@ -37,9 +37,9 @@
     "fabricante": "Bambu Lab",
     "modelo": "PETG HF",
     "material": "PETG",
-    "color": "verde",
-    "grupo": "AMS HT",
-    "hueco": "S1",
+    "color": "rojo",
+    "grupo": "AMS HT #1",
+    "hueco": "HT-A",
     "estado": "Nuevo",
     "notas": "Secado recomendado"
   }
