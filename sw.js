@@ -1,39 +1,22 @@
-const CACHE_NAME = "filaments-layout-v3";
+
+const CACHE_NAME = "filamentos-v5";
 const APP_SHELL = [
   "/",
   "/index.html",
-  "/app.js",
   "/styles.css",
+  "/app.js",
   "/manifest.webmanifest",
-  "/data/config.json",
-  "/data/inventario.json",
-  "/drawings/ams-2pro-base.png",
-  "/drawings/ams-ht-base.png",
-  "/drawings/shelf-1-base.png",
-  "/drawings/shelf-2-base.png"
+  "/drawings/ams-ht.png",
+  "/drawings/ams-2pro.png",
+  "/drawings/shelf1.png",
+  "/drawings/shelf2.png"
 ];
-
 self.addEventListener("install", (event) => {
-  self.skipWaiting();
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
 });
-
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    Promise.all([
-      self.clients.claim(),
-      caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
-    ])
-  );
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))));
 });
-
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
-  event.respondWith(
-    fetch(event.request).then((response) => {
-      const copy = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
-      return response;
-    }).catch(() => caches.match(event.request))
-  );
+  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
 });

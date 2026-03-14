@@ -1,5 +1,5 @@
 {
-  "storageKey": "juanjo-filaments-layout-v3",
+  "storageKey": "juanjo-filaments-layout-v5",
   "brands": [
     "Bambu Lab",
     "Prusament",
@@ -188,7 +188,7 @@
       "name": "AMS HT *2",
       "kind": "ams_ht",
       "slots": [
-        "HT1"
+        "HT2"
       ]
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "name": "Estantería *1",
-      "kind": "shelf_12",
+      "kind": "shelf",
       "slots": [
         "S1-01",
         "S1-02",
@@ -241,7 +241,7 @@
     },
     {
       "name": "Estantería *2",
-      "kind": "shelf_24",
+      "kind": "shelf",
       "slots": [
         "S2-01",
         "S2-02",
