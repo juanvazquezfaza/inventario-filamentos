@@ -18,20 +18,9 @@ body{
 .page{
   max-width:1920px;
   margin:0 auto;
-  padding:6px 10px 12px;
+  padding:4px 10px 12px;
 }
-.title-chip{
-  width:max-content;
-  margin:0 auto 6px;
-  padding:7px 16px;
-  background:#07090d;
-  color:#fff;
-  border-radius:14px;
-  font-weight:800;
-  font-size:16px;
-  letter-spacing:.2px;
-  box-shadow:0 8px 20px rgba(0,0,0,.25);
-}
+.title-chip{display:none}
 .visual-board{
   background:rgba(15,17,21,.24);
   border:1px solid rgba(255,255,255,.06);
@@ -109,7 +98,7 @@ body{
 .shelves-row{
   display:grid;
   min-height:0;
-  grid-template-columns:minmax(490px,1fr) minmax(1010px,2fr);
+  grid-template-columns:minmax(470px,1fr) minmax(970px,2fr);
   gap:16px;
   margin-top:8px;
   align-items:start;
@@ -118,7 +107,7 @@ body{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px 8px 6px;
+  padding:8px 8px 4px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -136,7 +125,7 @@ body{
   flex:0 0 auto;
   transform:scaleY(0.76);
   transform-origin:top center;
-  margin-bottom:-17%;
+  margin-bottom:-18%;
 }
 .shelf-visual img.base{
   width:100%;
@@ -171,7 +160,8 @@ body{
   top:69.5%;
   transform:translateX(-50%);
   width:74%;
-  padding:6px 6px 7px;
+  min-height:58px;
+  padding:7px 6px 8px;
   border-radius:11px;
   background:rgba(54,58,62,.38);
   border:1px solid rgba(255,255,255,.14);
@@ -179,9 +169,9 @@ body{
   color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);
 }
-.slot-label .slot-code{font-size:10px;font-weight:800;line-height:1.04;margin-bottom:2px}
-.slot-label .slot-brand{font-size:8.6px;font-weight:800;line-height:1.08;margin-bottom:2px;white-space:normal;overflow-wrap:anywhere}
-.slot-label .slot-mat{font-size:7.6px;font-weight:600;line-height:1.05;white-space:normal;overflow-wrap:anywhere}
+.slot-label .slot-code{font-size:11px;font-weight:800;line-height:1.04;margin-bottom:2px}
+.slot-label .slot-brand{font-size:9.6px;font-weight:800;line-height:1.08;margin-bottom:2px;white-space:normal;overflow-wrap:anywhere}
+.slot-label .slot-mat{font-size:8.4px;font-weight:600;line-height:1.08;white-space:normal;overflow-wrap:anywhere}
 .editor-panel{
   margin-top:6px;
   background:rgba(18,23,29,.82);
@@ -208,7 +198,7 @@ textarea{width:100%}
   .ams-row{gap:8px}
   .ht-card{width:118px;min-width:118px}
   .ams2-card{width:510px;min-width:510px}
-  .shelves-row{grid-template-columns:minmax(455px,1fr) minmax(945px,2fr);gap:14px}
+  .shelves-row{grid-template-columns:minmax(438px,1fr) minmax(908px,2fr);gap:14px}
   .slot-circle-wrap{width:38%}
   .slot-label{top:68.5%;width:72%}
 }
