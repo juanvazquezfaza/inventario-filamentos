@@ -31,10 +31,11 @@ body{
 }
 .ams-row{
   display:flex;
-  gap:10px;
-  justify-content:center;
+  gap:8px;
+  justify-content:flex-start;
   align-items:flex-end;
   flex-wrap:nowrap;
+  padding-left:24px;
 }
 .ams-card{
   flex:0 0 auto;
@@ -125,16 +126,16 @@ body{
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
 .slot-label{
-  position:absolute;left:50%;top:67%;transform:translateX(-50%);
-  width:74%;height:74%;max-height:190px;
+  position:absolute;left:50%;top:38.5%;transform:translateX(-50%);
+  width:76%;height:56%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
   border:1px solid rgba(255,255,255,.15);text-align:center;color:#fff;
   box-shadow:0 4px 10px rgba(0,0,0,.12);display:flex;flex-direction:column;overflow:hidden;
 }
-.slot-label .slot-code{font-size:12px;font-weight:800;line-height:1.05;margin-bottom:3px;flex:0 0 auto}
-.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.08;flex:1 1 auto;display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
-.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;flex:1 1 auto;display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
+.slot-label .slot-code{font-size:12px;font-weight:800;line-height:1.05;margin-bottom:4px;flex:0 0 auto}
+.slot-label .slot-brand{font-size:10px;font-weight:800;line-height:1.08;flex:1 1 auto;display:flex;align-items:flex-start;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
+.slot-label .slot-mat{font-size:9px;font-weight:600;line-height:1.08;flex:1 1 auto;display:flex;align-items:flex-start;justify-content:center;overflow-wrap:anywhere;text-wrap:balance}
 .editor-panel{
   margin-top:6px;background:rgba(18,23,29,.82);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:12px 14px;
 }
@@ -156,7 +157,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
   .shelf-visual{transform:scaleY(0.64);margin-bottom:-27%}
-  .slot-label{width:72%;top:66.5%}
+  .slot-label{width:74%;top:39%}
 }
 @media (max-width: 1600px){
   :root{--ams-h: clamp(124px, 16vh, 146px); --tag-w:50px; --tag-h:46px}
@@ -166,7 +167,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .shelf-panel:last-child{flex:3.086 1 0}
   .shelf-visual{transform:scaleY(0.61);margin-bottom:-29%}
   .slot-circle-wrap{width:29%}
-  .slot-label{width:70%;top:66%}
+  .slot-label{width:72%;top:39.5%}
   .slot-label .slot-code{font-size:11px}
   .slot-label .slot-brand{font-size:9.4px}
   .slot-label .slot-mat{font-size:8.4px}
