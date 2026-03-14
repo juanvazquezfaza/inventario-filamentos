@@ -35,7 +35,7 @@ body{
   justify-content:flex-start;
   align-items:flex-end;
   flex-wrap:nowrap;
-  padding-left:24px;
+  padding-left:36px;
 }
 .ams-card{
   flex:0 0 auto;
@@ -59,7 +59,7 @@ body{
 .ht-card{width:128px;min-width:128px}
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
-.ams-row .ams2-card:last-child{margin-left:-76px}
+.ams-row .ams2-card:last-child{margin-left:-112px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
@@ -95,13 +95,13 @@ body{
   display:flex;
   gap:14px;
   margin-top:8px;
-  align-items:stretch;
+  align-items:flex-start;
 }
 .shelf-panel{
   background:rgba(18,23,29,.72);
   border:1px solid rgba(255,255,255,.08);
   border-radius:18px;
-  padding:8px 8px 8px;
+  padding:8px 8px 2px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -159,7 +159,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   :root{--ams-h: clamp(132px, 17.2vh, 156px); --tag-w:52px; --tag-h:48px}
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
-  .shelf-visual{transform:scaleY(0.64);margin-bottom:-25%}
+  .shelf-visual{transform:scaleY(0.64);margin-bottom:-23%}
   .slot-label{width:74%;top:35.3%}
 }
 @media (max-width: 1600px){
@@ -168,7 +168,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ht-card{width:116px;min-width:116px}
   .shelf-panel:first-child{flex:1.55 1 0}
   .shelf-panel:last-child{flex:3.086 1 0}
-  .shelf-visual{transform:scaleY(0.61);margin-bottom:-26%}
+  .shelf-visual{transform:scaleY(0.61);margin-bottom:-24%}
   .slot-circle-wrap{width:29%}
   .slot-label{width:72%;top:35.8%}
   .slot-label .slot-code{font-size:11px}
