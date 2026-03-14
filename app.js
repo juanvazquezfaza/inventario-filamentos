@@ -51,6 +51,8 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
 
   const fig = document.createElement("div");
   fig.className = "ams-figure";
+  const figSize = type === "ht" ? config.visual.amsHt.size : config.visual.ams2Pro.size;
+  fig.style.aspectRatio = `${figSize[0]} / ${figSize[1]}`;
 
   const img = document.createElement("img");
   img.className = "base";
@@ -77,7 +79,7 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
       : config.visual.ams2Pro.masks[i].bbox;
     const baseSize = type === "ht" ? config.visual.amsHt.size : config.visual.ams2Pro.size;
     const centerX = ((bbox[0] + bbox[2]) / 2) / baseSize[0] * 100;
-    const y = type === "ht" ? 60 : 60;
+    const y = type === "ht" ? 63 : 62;
 
     const tag = document.createElement("div");
     tag.className = "ams-tag";
@@ -171,6 +173,7 @@ function renderAms() {
 function renderShelf(containerId, location, baseFile, size, boxes) {
   const root = byId(containerId);
   root.innerHTML = "";
+  root.style.aspectRatio = `${size[0]} / ${size[1]}`;
 
   const img = document.createElement("img");
   img.className = "base";
