@@ -131,8 +131,7 @@ body{
   display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
-.slot-label{
-  position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
+.slot-label{position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
   width:76%;height:56%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
