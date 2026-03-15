@@ -59,8 +59,8 @@ body{
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
 .ams-row .ht-card + .ams2-card{margin-left:2px}
-.ams-row .ams2-card + .ams2-card{margin-left:-18px}
-.ams-row .ams2-card:last-child{margin-left:-160px}
+.ams-row .ams2-card + .ams2-card{margin-left:-120px}
+.ams-row .ams2-card:last-child{margin-left:-200px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
