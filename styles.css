@@ -59,8 +59,8 @@ body{
 .ht-card + .ht-card{margin-left:-4px}
 .ams2-card{width:590px;min-width:590px}
 .ams-row .ht-card + .ams2-card{margin-left:2px}
-.ams-row .ams2-card + .ams2-card{margin-left:-180px}
-.ams-row .ams2-card:last-child{margin-left:-165px}
+.ams-row .ams2-card + .ams2-card{margin-left:-18px}
+.ams-row .ams2-card:last-child{margin-left:-34px}
 .ams-fill{
   position:absolute;inset:0;background:#fff;opacity:.92;pointer-events:none;mix-blend-mode:multiply;
   -webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:100% 100%;
@@ -126,12 +126,13 @@ body{
 .shelf-visual img.base{width:100%;height:auto;display:block}
 .slot-overlay{position:absolute}
 .slot-circle-wrap{
- .slot-label{ position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
+  position:absolute;left:50%;transform:translateX(-50%);
   width:31%;aspect-ratio:1/1;top:5.2%;border-radius:999px;background:#f6f6f6;border:2px solid #1c334e;
   display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.12);
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
-.slot-label{position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
+.slot-label{
+  position:absolute;left:50%;top:36.4%;transform:translateX(-50%);
   width:76%;height:56%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
