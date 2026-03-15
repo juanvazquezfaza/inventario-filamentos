@@ -1,9 +1,6 @@
 const STORAGE_KEY = "filamentos-definitivo-v2";
 const EXPORT_VERSION = 2;
 const IMPORT_ACCEPTED_KEYS = ["inventory", "filaments", "items", "data"];
-const CUSTOM_COLOR_OPTION = "__custom__";
-const CUSTOM_COLOR_LABEL = "Color manual…";
-
 let config = null;
 let inventory = [];
 
@@ -41,57 +38,53 @@ function colorToCss(colorName) {
   return config.colorHex[colorName] || "#cccccc";
 }
 
-function normalizeCustomColorCss(value) {
+function normalizeColorName(value) {
   const raw = String(value || "").trim();
   if (!raw) return "";
 
-  const named = {
-    blanco: config.colorHex.blanco,
-    negro: config.colorHex.negro,
-    gris: config.colorHex.gris,
-    plateado: config.colorHex.plateado,
-    transparente: config.colorHex.transparente,
-    rojo: config.colorHex.rojo,
-    naranja: config.colorHex.naranja,
-    amarillo: config.colorHex.amarillo,
-    verde: config.colorHex.verde,
-    azul: config.colorHex.azul,
-    cian: config.colorHex.cian,
-    morado: config.colorHex.morado,
-    rosa: config.colorHex.rosa,
-    marrón: config.colorHex.marrón,
-    marron: config.colorHex.marrón,
-    beige: config.colorHex.beige,
-    dorado: config.colorHex.dorado,
-    bronce: config.colorHex.bronce,
-    multicolor: config.colorHex.multicolor,
-    madera: config.colorHex.madera,
-    mármol: config.colorHex.mármol,
-    marmol: config.colorHex.mármol,
-    carbón: config.colorHex.carbón,
-    carbon: config.colorHex.carbón,
-    natural: config.colorHex.natural,
+  const aliases = {
+    blanco: "blanco",
+    negro: "negro",
+    gris: "gris",
+    plateado: "plateado",
+    transparente: "transparente",
+    rojo: "rojo",
+    naranja: "naranja",
+    amarillo: "amarillo",
+    verde: "verde",
+    azul: "azul",
+    cian: "cian",
+    morado: "morado",
+    rosa: "rosa",
+    marrón: "marrón",
+    marron: "marrón",
+    beige: "beige",
+    dorado: "dorado",
+    bronce: "bronce",
+    multicolor: "multicolor",
+    madera: "madera",
+    mármol: "mármol",
+    marmol: "mármol",
+    carbón: "carbón",
+    carbon: "carbón",
+    natural: "natural",
+    'galaxy black': 'Galaxy black',
+    'jet black': 'jet black',
+    'vertigo galaxy': 'Vertigo Galaxy',
+    'onyx black': 'onyx black',
+    black: 'negro',
   };
 
   const lowered = raw.toLowerCase();
-  if (named[lowered]) return named[lowered];
-  if (window.CSS && typeof window.CSS.supports === "function" && window.CSS.supports("color", raw)) {
-    return raw;
-  }
-  return "";
+  if (aliases[lowered]) return aliases[lowered];
+  return config.colors.find(color => color.toLowerCase() === lowered) || "";
 }
 
 function displayColorLabel(row) {
-  if (row.useCustomColor && row.colorManual?.trim()) {
-    return row.colorManual.trim();
-  }
   return row.color || "";
 }
 
 function effectiveColorCss(row) {
-  if (row.useCustomColor) {
-    return normalizeCustomColorCss(row.colorManual) || colorToCss(row.color);
-  }
   return colorToCss(row.color);
 }
 
@@ -174,10 +167,11 @@ function normalizeRow(row) {
   const validVariants = config.variants[materialGeneral] || [variantFallback];
   const variante = validVariants.includes(row.variante) ? row.variante : validVariants[0];
 
-  const rawColor = typeof row.color === "string" ? row.color.trim() : "";
-  const color = config.colors.includes(rawColor) ? rawColor : config.colors[0];
-  const colorManual = String(row.colorManual || row.customColor || (!config.colors.includes(rawColor) ? rawColor : "")).trim();
-  const useCustomColor = typeof row.useCustomColor === "boolean" ? row.useCustomColor : !!colorManual;
+  const colorCandidates = [row.color, row.colorManual, row.customColor];
+  const normalizedColor = colorCandidates
+    .map(normalizeColorName)
+    .find(Boolean);
+  const color = normalizedColor || config.colors[0];
 
   const ubicacion = config.locations.includes(row.ubicacion) ? row.ubicacion : config.locations[0];
   const huecos = config.huecos[ubicacion] || [""];
@@ -190,8 +184,6 @@ function normalizeRow(row) {
     materialGeneral,
     variante,
     color,
-    colorManual,
-    useCustomColor,
     ubicacion,
     hueco,
     estado,
@@ -398,26 +390,13 @@ function renderTable() {
 
     const huecos = config.huecos[row.ubicacion] || [];
     const variants = config.variants[row.materialGeneral] || [variantFallback];
-    const colorSelectValue = row.useCustomColor ? CUSTOM_COLOR_OPTION : row.color;
-    const colorOptions = [...config.colors, { value: CUSTOM_COLOR_OPTION, label: CUSTOM_COLOR_LABEL }];
 
     tr.innerHTML = `
       <td><span class="id-chip">${escapeHtml(row.id)}</span></td>
       <td><select data-index="${index}" data-field="fabricante">${optionList(config.brands, row.fabricante)}</select></td>
       <td><select data-index="${index}" data-field="materialGeneral">${optionList(config.materialGeneral, row.materialGeneral)}</select></td>
       <td><select data-index="${index}" data-field="variante">${optionList(variants, row.variante)}</select></td>
-      <td>
-        <div class="color-stack">
-          <select data-index="${index}" data-field="colorSelect">${optionList(colorOptions, colorSelectValue)}</select>
-          <input
-            class="manual-color-input${row.useCustomColor ? "" : " is-hidden"}"
-            data-index="${index}"
-            data-field="colorManual"
-            placeholder="Ej.: azul petróleo o #1f4d8f"
-            value="${escapeHtml(row.colorManual || "")}"
-          />
-        </div>
-      </td>
+      <td><select data-index="${index}" data-field="color">${optionList(config.colors, row.color)}</select></td>
       <td><select data-index="${index}" data-field="ubicacion">${optionList(config.locations, row.ubicacion)}</select></td>
       <td><select data-index="${index}" data-field="hueco">${optionList(huecos, row.hueco)}</select></td>
       <td><select data-index="${index}" data-field="estado">${optionList(config.states, row.estado)}</select></td>
@@ -432,19 +411,7 @@ function renderTable() {
       const index = Number(e.target.dataset.index);
       const field = e.target.dataset.field;
 
-      if (field === "colorSelect") {
-        if (e.target.value === CUSTOM_COLOR_OPTION) {
-          inventory[index].useCustomColor = true;
-        } else {
-          inventory[index].color = e.target.value;
-          inventory[index].useCustomColor = false;
-        }
-      } else if (field === "colorManual") {
-        inventory[index].colorManual = e.target.value.trim();
-        inventory[index].useCustomColor = true;
-      } else {
-        inventory[index][field] = e.target.value;
-      }
+      inventory[index][field] = e.target.value;
 
       if (field === "materialGeneral") {
         const nextVariants = config.variants[inventory[index].materialGeneral] || [variantFallback];
@@ -459,14 +426,7 @@ function renderTable() {
 
       persist();
       rerender();
-
-      if (field === "colorManual" && inventory[index].colorManual && !normalizeCustomColorCss(inventory[index].colorManual)) {
-        setStatus("Color manual guardado. Para que el círculo use exactamente ese tono, escribe un nombre CSS válido o un código tipo #1f4d8f.", "warn");
-      } else if (field === "colorSelect" && inventory[index].useCustomColor) {
-        setStatus("Modo de color manual activado para esa fila.", "ok");
-      } else {
-        setStatus("Cambios guardados en este dispositivo.", "ok");
-      }
+      setStatus("Cambios guardados en este dispositivo.", "ok");
     });
   });
 
@@ -494,8 +454,6 @@ function addRow() {
     materialGeneral: config.materialGeneral[0],
     variante: (config.variants[config.materialGeneral[0]] || [variantFallback])[0],
     color: config.colors[0],
-    colorManual: "",
-    useCustomColor: false,
     ubicacion: config.locations[0],
     hueco: config.huecos[config.locations[0]][0],
     estado: config.states[0],
@@ -506,9 +464,17 @@ function addRow() {
   setStatus("Fila añadida con ID autogenerado y guardada en este dispositivo.", "ok");
 }
 
-function resetDemo() {
-  localStorage.removeItem(STORAGE_KEY);
-  location.reload();
+function clearInventory() {
+  const confirmed = window.confirm("Se vaciará todo el inventario guardado en este dispositivo. ¿Continuar?");
+  if (!confirmed) {
+    setStatus("Vaciado cancelado.", "warn");
+    return;
+  }
+
+  inventory = [];
+  persist();
+  rerender();
+  setStatus("Inventario vaciado en este dispositivo.", "ok");
 }
 
 function formatTimestampForFile(date = new Date()) {
@@ -599,7 +565,7 @@ function triggerImportPicker() {
 
 loadData().then(() => {
   byId("addRowBtn").addEventListener("click", addRow);
-  byId("resetBtn").addEventListener("click", resetDemo);
+  byId("resetBtn").addEventListener("click", clearInventory);
   byId("exportBtn").addEventListener("click", exportInventory);
   byId("importBtn").addEventListener("click", triggerImportPicker);
   byId("importFileInput").addEventListener("change", (event) => {

@@ -1,0 +1,611 @@
+{
+  "brands": [
+    "Bambu Lab",
+    "Prusament",
+    "Polymaker",
+    "eSUN",
+    "SUNLU",
+    "Overture",
+    "HATCHBOX",
+    "MatterHackers",
+    "Fiberlogy",
+    "ColorFabb",
+    "Fillamentum",
+    "FormFutura",
+    "Spectrum Filaments",
+    "BASF Ultrafuse",
+    "Proto-pasta",
+    "3DXTech",
+    "Taulman3D",
+    "Ultimaker",
+    "Creality",
+    "Anycubic",
+    "ELEGOO",
+    "Duramic 3D",
+    "ERYONE",
+    "Inland (Micro Center)",
+    "Amazon Basics",
+    "Geeetech",
+    "Kodak",
+    "Raise3D",
+    "IC3D",
+    "Recreus",
+    "SmartMaterials3D",
+    "AIO Robotics",
+    "Mika3D",
+    "Amolen",
+    "Other / Generic"
+  ],
+  "materialGeneral": [
+    "PLA",
+    "PETG",
+    "ABS",
+    "ASA",
+    "TPU",
+    "PA (Nylon)",
+    "PC",
+    "PVA",
+    "HIPS",
+    "BVOH",
+    "PP",
+    "PCTG",
+    "PET",
+    "Otro"
+  ],
+  "variants": {
+    "PLA": [
+      "Standard",
+      "Matte",
+      "Silk",
+      "Tough/Pro",
+      "HF/HS",
+      "CF",
+      "GF",
+      "Glow",
+      "Wood",
+      "Marble",
+      "Sparkle",
+      "Aero"
+    ],
+    "PETG": [
+      "Standard",
+      "HF/HS",
+      "Transparent",
+      "Matte",
+      "CF",
+      "GF",
+      "ESD"
+    ],
+    "ABS": [
+      "Standard",
+      "Plus",
+      "CF",
+      "FR"
+    ],
+    "ASA": [
+      "Standard",
+      "CF",
+      "GF",
+      "Aero"
+    ],
+    "TPU": [
+      "85A",
+      "90A",
+      "95A",
+      "98A",
+      "HF/HS",
+      "ESD"
+    ],
+    "PA (Nylon)": [
+      "PA6",
+      "PA12",
+      "PA612",
+      "CoPA",
+      "CF",
+      "GF",
+      "ESD"
+    ],
+    "PC": [
+      "Standard",
+      "Blend",
+      "CF",
+      "FR"
+    ],
+    "PVA": [
+      "Standard"
+    ],
+    "HIPS": [
+      "Standard"
+    ],
+    "BVOH": [
+      "Standard"
+    ],
+    "PP": [
+      "Standard",
+      "GF"
+    ],
+    "PCTG": [
+      "Standard",
+      "Transparent"
+    ],
+    "PET": [
+      "Standard",
+      "CF",
+      "GF"
+    ],
+    "Otro": [
+      "Standard",
+      "Matte",
+      "Silk",
+      "Transparent",
+      "CF",
+      "GF",
+      "Wood",
+      "Glow"
+    ]
+  },
+  "colors": [
+    "blanco",
+    "negro",
+    "Galaxy black",
+    "jet black",
+    "Vertigo Galaxy",
+    "onyx black",
+    "gris",
+    "plateado",
+    "transparente",
+    "rojo",
+    "naranja",
+    "amarillo",
+    "verde",
+    "azul",
+    "cian",
+    "morado",
+    "rosa",
+    "marrón",
+    "beige",
+    "dorado",
+    "bronce",
+    "multicolor",
+    "madera",
+    "mármol",
+    "carbón",
+    "natural"
+  ],
+  "states": [
+    "Nuevo",
+    "Abierto",
+    "En uso",
+    "Casi vacío",
+    "Agotado"
+  ],
+  "abbrev": {
+    "Bambu Lab": "BBL",
+    "Prusament": "PRU",
+    "Polymaker": "POL",
+    "eSUN": "ESN",
+    "SUNLU": "SUN",
+    "Overture": "OVE",
+    "HATCHBOX": "HAT",
+    "MatterHackers": "MHK",
+    "Fiberlogy": "FIB",
+    "ColorFabb": "CLF",
+    "Fillamentum": "FIL",
+    "FormFutura": "FRM",
+    "Spectrum Filaments": "SPC",
+    "BASF Ultrafuse": "BASF",
+    "Proto-pasta": "PRO",
+    "3DXTech": "3DX",
+    "Taulman3D": "TAU",
+    "Ultimaker": "ULT",
+    "Creality": "CRE",
+    "Anycubic": "ANY",
+    "ELEGOO": "ELG",
+    "Duramic 3D": "DUR",
+    "ERYONE": "ERY",
+    "Inland (Micro Center)": "INL",
+    "Amazon Basics": "AMB",
+    "Geeetech": "GEE",
+    "Kodak": "KOD",
+    "Raise3D": "R3D",
+    "IC3D": "IC3"
+  },
+  "colorHex": {
+    "blanco": "#f6f7f8",
+    "negro": "#222222",
+    "gris": "#6f7480",
+    "plateado": "#c3c7cf",
+    "transparente": "rgba(240,240,245,0.88)",
+    "rojo": "#e04747",
+    "naranja": "#f08a24",
+    "amarillo": "#f0cf28",
+    "verde": "#66d26e",
+    "azul": "#4b9bf1",
+    "cian": "#39d2db",
+    "morado": "#9659f1",
+    "rosa": "#ef63b7",
+    "marrón": "#8a5b3a",
+    "beige": "#d9c19a",
+    "dorado": "#c8a62e",
+    "bronce": "#b37d45",
+    "multicolor": "linear-gradient(135deg,#ff4b4b,#ffd84b,#57d66a,#52a8ff,#b85cff)",
+    "madera": "#b2814f",
+    "mármol": "#dddfe5",
+    "carbón": "#43464b",
+    "natural": "#ede1c3",
+    "Galaxy black": "#43464b",
+    "jet black": "#222222",
+    "Vertigo Galaxy": "#43464b",
+    "onyx black": "#43464b"
+  },
+  "locations": [
+    "AMS HT *1",
+    "AMS HT *2",
+    "AMS 2 Pro *1",
+    "AMS 2 Pro *2",
+    "AMS 2 Pro *3",
+    "Estantería *1",
+    "Estantería *2"
+  ],
+  "huecos": {
+    "AMS HT *1": [
+      "HT1"
+    ],
+    "AMS HT *2": [
+      "HT2"
+    ],
+    "AMS 2 Pro *1": [
+      "A1",
+      "A2",
+      "A3",
+      "A4"
+    ],
+    "AMS 2 Pro *2": [
+      "B1",
+      "B2",
+      "B3",
+      "B4"
+    ],
+    "AMS 2 Pro *3": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ],
+    "Estantería *1": [
+      "S1-01",
+      "S1-02",
+      "S1-03",
+      "S1-04",
+      "S1-05",
+      "S1-06",
+      "S1-07",
+      "S1-08",
+      "S1-09",
+      "S1-10",
+      "S1-11",
+      "S1-12"
+    ],
+    "Estantería *2": [
+      "S2-01",
+      "S2-02",
+      "S2-03",
+      "S2-04",
+      "S2-05",
+      "S2-06",
+      "S2-07",
+      "S2-08",
+      "S2-09",
+      "S2-10",
+      "S2-11",
+      "S2-12",
+      "S2-13",
+      "S2-14",
+      "S2-15",
+      "S2-16",
+      "S2-17",
+      "S2-18",
+      "S2-19",
+      "S2-20",
+      "S2-21",
+      "S2-22",
+      "S2-23",
+      "S2-24"
+    ]
+  },
+  "visual": {
+    "amsHt": {
+      "size": [
+        615,
+        626
+      ],
+      "masks": [
+        {
+          "file": "drawings/ams-ht-fill-1.png",
+          "bbox": [
+            159,
+            91,
+            326,
+            310
+          ]
+        }
+      ]
+    },
+    "ams2Pro": {
+      "size": [
+        1524,
+        789
+      ],
+      "masks": [
+        {
+          "file": "drawings/ams-2pro-fill-1.png",
+          "bbox": [
+            193,
+            114,
+            403,
+            392
+          ]
+        },
+        {
+          "file": "drawings/ams-2pro-fill-2.png",
+          "bbox": [
+            445,
+            114,
+            655,
+            392
+          ]
+        },
+        {
+          "file": "drawings/ams-2pro-fill-3.png",
+          "bbox": [
+            705,
+            111,
+            915,
+            392
+          ]
+        },
+        {
+          "file": "drawings/ams-2pro-fill-4.png",
+          "bbox": [
+            975,
+            111,
+            1185,
+            392
+          ]
+        }
+      ]
+    },
+    "shelf1": {
+      "size": [
+        1550,
+        2475
+      ],
+      "boxes": [
+        [
+          112,
+          72,
+          260,
+          725
+        ],
+        [
+          410,
+          72,
+          260,
+          725
+        ],
+        [
+          879,
+          72,
+          260,
+          725
+        ],
+        [
+          1177,
+          72,
+          260,
+          725
+        ],
+        [
+          115,
+          874,
+          260,
+          724
+        ],
+        [
+          413,
+          874,
+          260,
+          724
+        ],
+        [
+          882,
+          874,
+          260,
+          724
+        ],
+        [
+          1180,
+          874,
+          260,
+          724
+        ],
+        [
+          122,
+          1676,
+          260,
+          724
+        ],
+        [
+          419,
+          1676,
+          260,
+          724
+        ],
+        [
+          889,
+          1676,
+          260,
+          724
+        ],
+        [
+          1186,
+          1676,
+          260,
+          724
+        ]
+      ]
+    },
+    "shelf2": {
+      "size": [
+        3086,
+        2475
+      ],
+      "boxes": [
+        [
+          112,
+          72,
+          261,
+          724
+        ],
+        [
+          411,
+          72,
+          261,
+          724
+        ],
+        [
+          881,
+          72,
+          261,
+          724
+        ],
+        [
+          1179,
+          72,
+          260,
+          724
+        ],
+        [
+          1649,
+          72,
+          260,
+          724
+        ],
+        [
+          1946,
+          72,
+          260,
+          724
+        ],
+        [
+          2415,
+          72,
+          259,
+          724
+        ],
+        [
+          2713,
+          72,
+          259,
+          724
+        ],
+        [
+          116,
+          874,
+          260,
+          724
+        ],
+        [
+          415,
+          874,
+          260,
+          724
+        ],
+        [
+          884,
+          874,
+          261,
+          724
+        ],
+        [
+          1182,
+          874,
+          261,
+          724
+        ],
+        [
+          1652,
+          874,
+          259,
+          724
+        ],
+        [
+          1950,
+          874,
+          259,
+          724
+        ],
+        [
+          2418,
+          874,
+          260,
+          724
+        ],
+        [
+          2716,
+          874,
+          260,
+          724
+        ],
+        [
+          122,
+          1676,
+          261,
+          724
+        ],
+        [
+          420,
+          1676,
+          261,
+          724
+        ],
+        [
+          890,
+          1676,
+          261,
+          724
+        ],
+        [
+          1189,
+          1676,
+          261,
+          724
+        ],
+        [
+          1658,
+          1676,
+          260,
+          724
+        ],
+        [
+          1956,
+          1676,
+          260,
+          724
+        ],
+        [
+          2425,
+          1676,
+          259,
+          724
+        ],
+        [
+          2722,
+          1676,
+          259,
+          724
+        ]
+      ]
+    }
+  }
+}
