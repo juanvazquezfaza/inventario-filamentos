@@ -1,11 +1,13 @@
-
 const STORAGE_KEY = "filamentos-definitivo-v2";
+const EXPORT_VERSION = 2;
+const IMPORT_ACCEPTED_KEYS = ["inventory", "filaments", "items", "data"];
+const CUSTOM_COLOR_OPTION = "__custom__";
+const CUSTOM_COLOR_LABEL = "Color manual…";
 
 let config = null;
 let inventory = [];
 
 const byId = (id) => document.getElementById(id);
-
 const variantFallback = "Standard";
 
 function safeAbbrev(name) {
@@ -14,6 +16,15 @@ function safeAbbrev(name) {
 
 function fullBrand(name) {
   return name || "";
+}
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 function fitText(el, minPx = 6, maxPx = 12) {
@@ -30,9 +41,100 @@ function colorToCss(colorName) {
   return config.colorHex[colorName] || "#cccccc";
 }
 
+function normalizeCustomColorCss(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  const named = {
+    blanco: config.colorHex.blanco,
+    negro: config.colorHex.negro,
+    gris: config.colorHex.gris,
+    plateado: config.colorHex.plateado,
+    transparente: config.colorHex.transparente,
+    rojo: config.colorHex.rojo,
+    naranja: config.colorHex.naranja,
+    amarillo: config.colorHex.amarillo,
+    verde: config.colorHex.verde,
+    azul: config.colorHex.azul,
+    cian: config.colorHex.cian,
+    morado: config.colorHex.morado,
+    rosa: config.colorHex.rosa,
+    marrón: config.colorHex.marrón,
+    marron: config.colorHex.marrón,
+    beige: config.colorHex.beige,
+    dorado: config.colorHex.dorado,
+    bronce: config.colorHex.bronce,
+    multicolor: config.colorHex.multicolor,
+    madera: config.colorHex.madera,
+    mármol: config.colorHex.mármol,
+    marmol: config.colorHex.mármol,
+    carbón: config.colorHex.carbón,
+    carbon: config.colorHex.carbón,
+    natural: config.colorHex.natural,
+  };
+
+  const lowered = raw.toLowerCase();
+  if (named[lowered]) return named[lowered];
+  if (window.CSS && typeof window.CSS.supports === "function" && window.CSS.supports("color", raw)) {
+    return raw;
+  }
+  return "";
+}
+
+function displayColorLabel(row) {
+  if (row.useCustomColor && row.colorManual?.trim()) {
+    return row.colorManual.trim();
+  }
+  return row.color || "";
+}
+
+function effectiveColorCss(row) {
+  if (row.useCustomColor) {
+    return normalizeCustomColorCss(row.colorManual) || colorToCss(row.color);
+  }
+  return colorToCss(row.color);
+}
+
 function shortMaterial(row) {
   const parts = [row.materialGeneral, row.variante].filter(Boolean);
   return parts.join(" · ");
+}
+
+function setStatus(message = "", type = "") {
+  const el = byId("syncStatus");
+  if (!el) return;
+  el.textContent = message;
+  el.className = `status-pill${type ? ` ${type}` : ""}`;
+}
+
+function parseFilamentIdNumber(id) {
+  const match = String(id || "").trim().toUpperCase().match(/^FIL-(\d+)$/);
+  return match ? Number(match[1]) : 0;
+}
+
+function ensureInventoryIds(rows) {
+  let maxNumber = 0;
+  rows.forEach((row) => {
+    maxNumber = Math.max(maxNumber, parseFilamentIdNumber(row.id));
+  });
+
+  const seen = new Set();
+  return rows.map((row) => {
+    let id = String(row.id || "").trim().toUpperCase();
+    if (!/^FIL-\d+$/.test(id) || seen.has(id)) {
+      do {
+        maxNumber += 1;
+        id = `FIL-${String(maxNumber).padStart(4, "0")}`;
+      } while (seen.has(id));
+    }
+    seen.add(id);
+    return { ...row, id };
+  });
+}
+
+function generateNextFilamentId() {
+  const maxNumber = inventory.reduce((max, row) => Math.max(max, parseFilamentIdNumber(row.id)), 0);
+  return `FIL-${String(maxNumber + 1).padStart(4, "0")}`;
 }
 
 function loadData() {
@@ -43,6 +145,8 @@ function loadData() {
     config = cfg;
     const saved = localStorage.getItem(STORAGE_KEY);
     inventory = saved ? JSON.parse(saved) : baseInventory;
+    inventory = normalizeInventory(inventory);
+    persist();
   });
 }
 
@@ -52,6 +156,47 @@ function persist() {
 
 function getRow(location, hueco) {
   return inventory.find(r => r.ubicacion === location && r.hueco === hueco);
+}
+
+function normalizeInventory(rows) {
+  if (!Array.isArray(rows)) return [];
+  const normalized = rows.map(normalizeRow).filter(Boolean);
+  return ensureInventoryIds(normalized);
+}
+
+function normalizeRow(row) {
+  if (!row || typeof row !== "object") return null;
+
+  const fabricante = config.brands.includes(row.fabricante) ? row.fabricante : config.brands[0];
+  const materialGeneral = config.materialGeneral.includes(row.materialGeneral)
+    ? row.materialGeneral
+    : config.materialGeneral[0];
+  const validVariants = config.variants[materialGeneral] || [variantFallback];
+  const variante = validVariants.includes(row.variante) ? row.variante : validVariants[0];
+
+  const rawColor = typeof row.color === "string" ? row.color.trim() : "";
+  const color = config.colors.includes(rawColor) ? rawColor : config.colors[0];
+  const colorManual = String(row.colorManual || row.customColor || (!config.colors.includes(rawColor) ? rawColor : "")).trim();
+  const useCustomColor = typeof row.useCustomColor === "boolean" ? row.useCustomColor : !!colorManual;
+
+  const ubicacion = config.locations.includes(row.ubicacion) ? row.ubicacion : config.locations[0];
+  const huecos = config.huecos[ubicacion] || [""];
+  const hueco = huecos.includes(row.hueco) ? row.hueco : huecos[0];
+  const estado = config.states.includes(row.estado) ? row.estado : config.states[0];
+
+  return {
+    id: row.id || "",
+    fabricante,
+    materialGeneral,
+    variante,
+    color,
+    colorManual,
+    useCustomColor,
+    ubicacion,
+    hueco,
+    estado,
+    notas: typeof row.notas === "string" ? row.notas : ""
+  };
 }
 
 function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
@@ -78,7 +223,7 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
     const row = getRow(location, hueco);
     const fill = document.createElement("div");
     fill.className = "ams-fill";
-    fill.style.background = row ? colorToCss(row.color) : "transparent";
+    fill.style.background = row ? effectiveColorCss(row) : "transparent";
     fill.style.webkitMaskImage = `url("${maskFiles[i]}")`;
     fill.style.maskImage = `url("${maskFiles[i]}")`;
     fig.appendChild(fill);
@@ -102,7 +247,7 @@ function createAmsCard(title, type, location, huecos, baseFile, maskFiles) {
     tag.innerHTML = `
       <div class="slot">${hueco}</div>
       <div class="brand">${row ? fullBrand(row.fabricante) : ""}</div>
-      <div class="mat">${row ? `${row.materialGeneral}${row.color ? " · " + row.color : ""}` : ""}</div>
+      <div class="mat">${row ? `${row.materialGeneral}${displayColorLabel(row) ? " · " + displayColorLabel(row) : ""}` : ""}</div>
     `;
     slots.appendChild(tag);
   });
@@ -214,10 +359,9 @@ function renderShelf(containerId, location, baseFile, size, boxes) {
 
     const circleWrap = document.createElement("div");
     circleWrap.className = "slot-circle-wrap";
-
     const circle = document.createElement("div");
     circle.className = "slot-circle-inner";
-    circle.style.background = row ? colorToCss(row.color) : "transparent";
+    circle.style.background = row ? effectiveColorCss(row) : "transparent";
     circleWrap.appendChild(circle);
 
     const label = document.createElement("div");
@@ -225,7 +369,7 @@ function renderShelf(containerId, location, baseFile, size, boxes) {
     label.innerHTML = `
       <div class="slot-code">${hueco}</div>
       <div class="slot-brand">${row ? fullBrand(row.fabricante) : ""}</div>
-      <div class="slot-mat">${row ? `${row.materialGeneral}${row.color ? " · " + row.color : ""}` : ""}</div>
+      <div class="slot-mat">${row ? `${row.materialGeneral}${displayColorLabel(row) ? " · " + displayColorLabel(row) : ""}` : ""}</div>
     `;
 
     overlay.appendChild(circleWrap);
@@ -240,7 +384,10 @@ function renderShelf(containerId, location, baseFile, size, boxes) {
 }
 
 function optionList(options, selected) {
-  return options.map(v => `<option value="${String(v).replaceAll('"','&quot;')}" ${v === selected ? "selected" : ""}>${v}</option>`).join("");
+  return options.map((item) => {
+    const option = typeof item === "string" ? { value: item, label: item } : item;
+    return `<option value="${escapeHtml(option.value)}" ${option.value === selected ? "selected" : ""}>${escapeHtml(option.label)}</option>`;
+  }).join("");
 }
 
 function renderTable() {
@@ -251,16 +398,30 @@ function renderTable() {
 
     const huecos = config.huecos[row.ubicacion] || [];
     const variants = config.variants[row.materialGeneral] || [variantFallback];
+    const colorSelectValue = row.useCustomColor ? CUSTOM_COLOR_OPTION : row.color;
+    const colorOptions = [...config.colors, { value: CUSTOM_COLOR_OPTION, label: CUSTOM_COLOR_LABEL }];
 
     tr.innerHTML = `
+      <td><span class="id-chip">${escapeHtml(row.id)}</span></td>
       <td><select data-index="${index}" data-field="fabricante">${optionList(config.brands, row.fabricante)}</select></td>
       <td><select data-index="${index}" data-field="materialGeneral">${optionList(config.materialGeneral, row.materialGeneral)}</select></td>
       <td><select data-index="${index}" data-field="variante">${optionList(variants, row.variante)}</select></td>
-      <td><select data-index="${index}" data-field="color">${optionList(config.colors, row.color)}</select></td>
+      <td>
+        <div class="color-stack">
+          <select data-index="${index}" data-field="colorSelect">${optionList(colorOptions, colorSelectValue)}</select>
+          <input
+            class="manual-color-input${row.useCustomColor ? "" : " is-hidden"}"
+            data-index="${index}"
+            data-field="colorManual"
+            placeholder="Ej.: azul petróleo o #1f4d8f"
+            value="${escapeHtml(row.colorManual || "")}"
+          />
+        </div>
+      </td>
       <td><select data-index="${index}" data-field="ubicacion">${optionList(config.locations, row.ubicacion)}</select></td>
       <td><select data-index="${index}" data-field="hueco">${optionList(huecos, row.hueco)}</select></td>
       <td><select data-index="${index}" data-field="estado">${optionList(config.states, row.estado)}</select></td>
-      <td><input data-index="${index}" data-field="notas" value="${(row.notas || "").replaceAll('"','&quot;')}" /></td>
+      <td><input data-index="${index}" data-field="notas" value="${escapeHtml(row.notas || "")}" /></td>
       <td><button class="small-btn" data-delete="${index}">Borrar</button></td>
     `;
     body.appendChild(tr);
@@ -270,7 +431,20 @@ function renderTable() {
     el.addEventListener("change", (e) => {
       const index = Number(e.target.dataset.index);
       const field = e.target.dataset.field;
-      inventory[index][field] = e.target.value;
+
+      if (field === "colorSelect") {
+        if (e.target.value === CUSTOM_COLOR_OPTION) {
+          inventory[index].useCustomColor = true;
+        } else {
+          inventory[index].color = e.target.value;
+          inventory[index].useCustomColor = false;
+        }
+      } else if (field === "colorManual") {
+        inventory[index].colorManual = e.target.value.trim();
+        inventory[index].useCustomColor = true;
+      } else {
+        inventory[index][field] = e.target.value;
+      }
 
       if (field === "materialGeneral") {
         const nextVariants = config.variants[inventory[index].materialGeneral] || [variantFallback];
@@ -285,6 +459,14 @@ function renderTable() {
 
       persist();
       rerender();
+
+      if (field === "colorManual" && inventory[index].colorManual && !normalizeCustomColorCss(inventory[index].colorManual)) {
+        setStatus("Color manual guardado. Para que el círculo use exactamente ese tono, escribe un nombre CSS válido o un código tipo #1f4d8f.", "warn");
+      } else if (field === "colorSelect" && inventory[index].useCustomColor) {
+        setStatus("Modo de color manual activado para esa fila.", "ok");
+      } else {
+        setStatus("Cambios guardados en este dispositivo.", "ok");
+      }
     });
   });
 
@@ -293,6 +475,7 @@ function renderTable() {
       inventory.splice(Number(btn.dataset.delete), 1);
       persist();
       rerender();
+      setStatus("Fila eliminada y cambios guardados.", "ok");
     });
   });
 }
@@ -306,11 +489,13 @@ function rerender() {
 
 function addRow() {
   inventory.unshift({
-    id: Date.now(),
+    id: generateNextFilamentId(),
     fabricante: config.brands[0],
     materialGeneral: config.materialGeneral[0],
     variante: (config.variants[config.materialGeneral[0]] || [variantFallback])[0],
     color: config.colors[0],
+    colorManual: "",
+    useCustomColor: false,
     ubicacion: config.locations[0],
     hueco: config.huecos[config.locations[0]][0],
     estado: config.states[0],
@@ -318,6 +503,7 @@ function addRow() {
   });
   persist();
   rerender();
+  setStatus("Fila añadida con ID autogenerado y guardada en este dispositivo.", "ok");
 }
 
 function resetDemo() {
@@ -325,8 +511,103 @@ function resetDemo() {
   location.reload();
 }
 
+function formatTimestampForFile(date = new Date()) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}_${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`;
+}
+
+function downloadTextFile(filename, text, mimeType = "application/json") {
+  const blob = new Blob([text], { type: `${mimeType};charset=utf-8` });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportInventory() {
+  const payload = {
+    version: EXPORT_VERSION,
+    exportedAt: new Date().toISOString(),
+    app: "inventario-filamentos",
+    inventory
+  };
+
+  const filename = `inventario-filamentos_${formatTimestampForFile()}.json`;
+  downloadTextFile(filename, JSON.stringify(payload, null, 2));
+  setStatus(`Archivo exportado: ${filename}`, "ok");
+}
+
+function extractImportedRows(payload) {
+  if (Array.isArray(payload)) return payload;
+  if (!payload || typeof payload !== "object") return null;
+
+  for (const key of IMPORT_ACCEPTED_KEYS) {
+    if (Array.isArray(payload[key])) {
+      return payload[key];
+    }
+  }
+
+  return null;
+}
+
+async function importInventoryFile(file) {
+  if (!file) return;
+
+  try {
+    const text = await file.text();
+    const payload = JSON.parse(text);
+    const importedRows = extractImportedRows(payload);
+
+    if (!importedRows) {
+      throw new Error("El archivo no tiene un inventario válido.");
+    }
+
+    const normalizedRows = normalizeInventory(importedRows);
+    if (!normalizedRows.length) {
+      throw new Error("El archivo está vacío o no contiene filas utilizables.");
+    }
+
+    const confirmed = window.confirm(
+      `Se van a reemplazar ${inventory.length} filas actuales por ${normalizedRows.length} filas del archivo. ¿Continuar?`
+    );
+
+    if (!confirmed) {
+      setStatus("Importación cancelada.", "warn");
+      return;
+    }
+
+    inventory = normalizedRows;
+    persist();
+    rerender();
+    setStatus(`Importación completada: ${normalizedRows.length} filas cargadas.`, "ok");
+  } catch (error) {
+    console.error(error);
+    setStatus(error.message || "No se pudo importar el archivo.", "error");
+  }
+}
+
+function triggerImportPicker() {
+  const input = byId("importFileInput");
+  if (!input) return;
+  input.value = "";
+  input.click();
+}
+
 loadData().then(() => {
   byId("addRowBtn").addEventListener("click", addRow);
   byId("resetBtn").addEventListener("click", resetDemo);
+  byId("exportBtn").addEventListener("click", exportInventory);
+  byId("importBtn").addEventListener("click", triggerImportPicker);
+  byId("importFileInput").addEventListener("change", (event) => {
+    importInventoryFile(event.target.files?.[0]);
+  });
   rerender();
+  setStatus("Los cambios se guardan en este dispositivo. Usa exportar/importar para pasarlos a otro.", "ok");
+}).catch((error) => {
+  console.error(error);
+  setStatus("No se pudieron cargar los datos iniciales.", "error");
 });

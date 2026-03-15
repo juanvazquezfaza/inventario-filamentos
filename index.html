@@ -29,16 +29,25 @@
         <div>
           <h2>Inventario editable</h2>
           <p>Cambia fabricante, material, variante, color, ubicación y hueco. El dibujo se actualiza al instante.</p>
+          <p class="panel-sync-help">Ahora la tabla muestra un ID autogenerado por filamento y, en color, puedes usar el desplegable o escribir uno manual.</p>
+          <p class="panel-sync-help">Para pasar los cambios entre iPhone y MacBook: exporta un JSON en un dispositivo e impórtalo en el otro.</p>
         </div>
         <div class="panel-actions">
           <button id="addRowBtn" class="btn btn-primary">Añadir fila</button>
+          <button id="exportBtn" class="btn">Exportar JSON</button>
+          <button id="importBtn" class="btn">Importar JSON</button>
           <button id="resetBtn" class="btn">Reiniciar demo</button>
+          <input id="importFileInput" type="file" accept="application/json,.json" hidden />
         </div>
       </div>
+
+      <div id="syncStatus" class="status-pill" aria-live="polite"></div>
+
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Fabricante</th>
               <th>Material general</th>
               <th>Variante</th>
