@@ -1,4 +1,4 @@
-const CACHE = "filamentos-definitivo-v30";
+const CACHE = "filamentos-definitivo-v31";
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(["./","./index.html","./styles.css","./app.js","./data/config.json","./data/inventario.json"])));
 });
