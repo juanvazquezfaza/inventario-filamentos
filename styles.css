@@ -132,7 +132,7 @@ body{
 }
 .slot-circle-inner{width:86%;height:86%;border-radius:999px;background:#bbb}
 .slot-label{
-  position:absolute;left:50%;top:34.4%;transform:translateX(-50%);
+  position:absolute;left:50%;top:33.4%;transform:translateX(-50%);
   width:76%;height:56%;max-height:170px;
   aspect-ratio:1 / 1;
   padding:8px 7px 7px;border-radius:12px;background:rgba(54,58,62,.40);
@@ -184,7 +184,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .ams2-card{width:552px;min-width:552px}
   .ht-card{width:122px;min-width:122px}
   .shelf-visual{transform:scaleY(0.64);margin-bottom:-36%}
-  .slot-label{width:74%;top:37.1%}
+  .slot-label{width:74%;top:36.1%}
 }
 @media (max-width: 1600px){
   :root{--ams-h: clamp(124px, 16vh, 146px); --tag-w:50px; --tag-h:46px}
@@ -194,7 +194,7 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .shelf-panel:last-child{flex:3.086 1 0}
   .shelf-visual{transform:scaleY(0.61);margin-bottom:-39%}
   .slot-circle-wrap{width:29%}
-  .slot-label{width:72%;top:37.6%}
+  .slot-label{width:72%;top:36.6%}
   .slot-label .slot-code{font-size:11px}
   .slot-label .slot-brand{font-size:9.4px}
   .slot-label .slot-mat{font-size:8.4px}
