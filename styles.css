@@ -223,7 +223,26 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
   .panel-head{flex-direction:column}
   .panel-actions{justify-content:flex-start}
 }
- 
+ @media (max-width: 1024px){
+  .shelves-row{
+    flex-direction:column;
+    gap:20px;
+  }
+
+  .shelf-panel,
+  .shelf-panel:first-child,
+  .shelf-panel:last-child{
+    width:100%;
+    flex:0 0 auto;
+  }
+
+  .shelf-visual,
+  .shelf-panel:first-child .shelf-visual,
+  .shelf-panel:last-child .shelf-visual{
+    transform:none !important;
+    margin-bottom:0 !important;
+  }
+}
 
  
 
