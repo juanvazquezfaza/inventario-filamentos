@@ -252,6 +252,28 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
     margin-bottom:-58% !important;
   }
 }
- 
+ @media (max-width: 1024px){
+  .ams-row{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    align-items:start;
+  }
+
+  .ams-row .ht-card + .ams2-card,
+  .ams-row .ams2-card + .ams2-card,
+  .ams-row .ams2-card:last-child{
+    margin-left:0 !important;
+  }
+
+  .ams2-card{
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  .ams-row .ams2-card{
+    grid-column:1 / -1;
+  }
+}
 
   
