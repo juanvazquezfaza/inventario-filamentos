@@ -243,7 +243,15 @@ input,select{width:100%;background:#1a2129;border:1px solid #2e3a45;color:#fff;b
     margin-bottom:0 !important;
   }
 }
+@media (min-width: 1025px){
+  .shelf-panel:first-child{
+    padding-bottom:0 !important;
+  }
 
+  .shelf-panel:first-child .shelf-visual{
+    margin-bottom:-58% !important;
+  }
+}
  
 
   
